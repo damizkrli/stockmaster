@@ -11,14 +11,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
-    public function index(
+    private SupplyRepository $supplyRepository;
+    private OutOfStockRepository $outOfStockRepository;
+    private ProductRepository $productRepository;
+
+    public function __construct(
         SupplyRepository $supplyRepository,
         OutOfStockRepository $outOfStockRepository,
-    ): Response {
-        $supplies = $supplyRepository->findBy([], ['addedAt' => 'DESC']);
+        ProductRepository $productRepository
+    ) {
+        $this->productRepository = $productRepository;
+        $this->supplyRepository = $supplyRepository;
+        $this->outOfStockRepository = $outOfStockRepository;
+    }
+
+    #[Route('/', name: 'home')]
+    public function index(): Response {
+        $products = $this->productRepository->findBy([], ['addedAt' => 'DESC']);
+        $outOfStock = $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']);
+        $supplies = $this->supplyRepository->findBy([], ['addedAt' => 'DESC']);
 
         return $this->render('home/index.html.twig', [
+            'products' => $products,
+            'outOfStocks' => $outOfStock,
             'supplies' => $supplies,
         ]);
     }
