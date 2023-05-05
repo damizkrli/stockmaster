@@ -16,6 +16,7 @@ class OutOfStockFixtures extends Fixture
         for ($i = 0; $i < 15; $i++) {
             $product = new OutOfStock();
             $product->setName($faker->words(2, true))
+                ->setBrand($faker->words(1, true))
                 ->setReference($faker->bothify('???-###') . '-' . $faker->bothify('???'))
                 ->setQuantity($faker->randomDigit())
             ;
