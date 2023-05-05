@@ -17,7 +17,7 @@ class OutOfStockController extends AbstractController
     public function index(OutOfStockRepository $outOfStockRepository): Response
     {
         return $this->render('out_of_stock/index.html.twig', [
-            'out_of_stocks' => $outOfStockRepository->findAll(),
+            'out_of_stocks' => $outOfStockRepository->findBy([], ['addedAt' => 'DESC']),
         ]);
     }
 
