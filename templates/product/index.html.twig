@@ -4,39 +4,68 @@
 
 {% block body %}
    <div class="container">
-       <h1>Product index</h1>
 
-       <table class="table">
-           <thead>
-           <tr>
-               <th>Quantity</th>
-               <th>Name</th>
-               <th>Reference</th>
-               <th>Serial_number</th>
-               <th>AddedAt</th>
-               <th>actions</th>
-           </tr>
-           </thead>
-           <tbody>
-           {% for products in product %}
-               <tr>
-                   <td>{{ products.quantity }}</td>
-                   <td>{{ products.name }}</td>
-                   <td>{{ products.reference }}</td>
-                   <td>{{ products.serialNumber }}</td>
-                   <td>{{ products.addedAt|date('Y-m-d') }}</td>
-                   <td>
-                       <a href="{{ path('edit_product', {'id': products.id}) }}">edit</a>
-                   </td>
-               </tr>
-           {% else %}
-               <tr>
-                   <td colspan="7">no records found</td>
-               </tr>
-           {% endfor %}
-           </tbody>
-       </table>
-
-       <a href="{{ path('new_product') }}">Create new</a>
+       <div class="container mt-5">
+           <h2 class="pb-4 text-start font-bold font-up deep-purple-text">STOCK</h2>
+           <div class="rounded-3">
+               <table class="table border border-2">
+                   <thead style="background-color: darkgray;">
+                   <tr>
+                       <th class="text-center">Quantité</th>
+                       <th class="text-center">Marque</th>
+                       <th class="text-center">Désignation</th>
+                       <th class="text-center">Référence</th>
+                       <th class="text-center">Numéro de série</th>
+                       <th class="text-center">Entrée en stock</th>
+                   </tr>
+                   </thead>
+                   {% for product in products %}
+                       <tbody>
+                       {% include 'layout/conditions/productOff.php' %}
+                       </tbody>
+                   {% endfor %}
+               </table>
+           </div>
+       </div>
+       <button class="btn btn-dark">
+           <a class="text-decoration-none text-white" href="{{ path('new_product') }}">Create new</a>
+       </button>
    </div>
+{#       <h1>Product index</h1>#}
+
+{#       <table class="table">#}
+{#           <thead>#}
+{#           <tr>#}
+{#               <th>Quantity</th>#}
+{#               <th>Name</th>#}
+{#               <th>Reference</th>#}
+{#               <th>Serial_number</th>#}
+{#               <th>AddedAt</th>#}
+{#               <th>actions</th>#}
+{#           </tr>#}
+{#           </thead>#}
+{#           <tbody>#}
+{#           {% for products in product %}#}
+{#               <tr>#}
+{#                   <td>{{ products.quantity }}</td>#}
+{#                   <td>{{ products.name }}</td>#}
+{#                   <td>{{ products.reference }}</td>#}
+{#                   <td>{{ products.serialNumber }}</td>#}
+{#                   <td>{{ products.addedAt|date('Y-m-d') }}</td>#}
+{#                   <td>#}
+{#                       <a href="{{ path('edit_product', {'id': products.id}) }}">edit</a>#}
+{#                   </td>#}
+{#               </tr>#}
+{#           {% else %}#}
+{#               <tr>#}
+{#                   <td colspan="7">no records found</td>#}
+{#               </tr>#}
+{#           {% endfor %}#}
+{#           </tbody>#}
+{#       </table>#}
+
+{#    <button class="bnt btn-dark">#}
+{#        <a href="{{ path('new_product') }}">Create new</a>#}
+{#    </button>#}
+{#   </div>#}
 {% endblock %}

@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <h2 class="pb-4 text-start font-bold font-up deep-purple-text">STOCK</h2>
+    <div class="rounded-3">
+        <table class="table border border-2">
+            <thead style="background-color: darkgray;">
+            <tr>
+                <th class="text-center"></th>
+                <th class="text-center">Quantité</th>
+                <th class="text-center">Marque</th>
+                <th class="text-center">Désignation</th>
+                <th class="text-center">Référence</th>
+                <th class="text-center">Numéro de série</th>
+                <th class="text-center">Entrée en stock</th>
+            </tr>
+            </thead>
+            {% for product in products %}
+                <tbody>
+                    {% include '/layout/conditions/productSoonOff.php' %}
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
