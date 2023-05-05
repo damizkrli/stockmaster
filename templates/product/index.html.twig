@@ -8,18 +8,7 @@
        <div class="container mt-5">
            <h2 class="pb-4 text-start font-bold font-up deep-purple-text">STOCK</h2>
 
-           <div class="container text-center">
-               {{ form_start(form) }}
-               <div class="row mb-3 flex align-items-center justify-content-center">
-                   <div class="col">{{ form_row(form.quantity, {'attr': { 'class': 'rounded-3' }}) }}</div>
-                   <div class="col">{{ form_row(form.brand, {'attr': { 'class': 'rounded-3' }}) }}</div>
-                   <div class="col">{{ form_row(form.name, {'attr': { 'class': 'rounded-3' }}) }}</div>
-                   <div class="col">{{ form_row(form.reference, {'attr': { 'class': 'rounded-3' }}) }}</div>
-                   <div class="col">{{ form_row(form.serial_number, {'attr': { 'class': 'rounded-3' }}) }}</div>
-                   <button class="col btn btn-dark">{{ button_label|default('Valider') }}</button>
-               </div>
-               {{ form_end(form) }}
-           </div>
+           {% include 'product/_form.html.twig' %}
 
            <div class="rounded-3">
                <table class="table border border-2 table-hover">
@@ -31,6 +20,7 @@
                        <th class="text-center">Référence</th>
                        <th class="text-center">Numéro de série</th>
                        <th class="text-center">Entrée en stock</th>
+                       <td class="text-center fw-bold" colspan="2">Actions</td>
                    </tr>
                    </thead>
                    {% for product in products %}
@@ -67,7 +57,6 @@
 {#                   <td>{{ products.serialNumber }}</td>#}
 {#                   <td>{{ products.addedAt|date('Y-m-d') }}</td>#}
 {#                   <td>#}
-{#                       <a href="{{ path('edit_product', {'id': products.id}) }}">edit</a>#}
 {#                   </td>#}
 {#               </tr>#}
 {#           {% else %}#}
