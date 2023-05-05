@@ -27,6 +27,9 @@ class OutOfStock
     #[ORM\Column]
     private ?DateTimeImmutable $addedAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $brand = null;
+
     public function __construct()
     {
         $this->addedAt = new DateTimeImmutable();
@@ -92,6 +95,18 @@ class OutOfStock
     public function setAddedAt(?DateTimeImmutable $addedAt): void
     {
         $this->addedAt = $addedAt;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
+
+        return $this;
     }
 
 }
