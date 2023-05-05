@@ -7,8 +7,22 @@
 
        <div class="container mt-5">
            <h2 class="pb-4 text-start font-bold font-up deep-purple-text">STOCK</h2>
+
+           <div class="container text-center">
+               {{ form_start(form) }}
+               <div class="row mb-3 flex align-items-center justify-content-center">
+                   <div class="col">{{ form_row(form.quantity, {'attr': { 'class': 'rounded-3' }}) }}</div>
+                   <div class="col">{{ form_row(form.brand, {'attr': { 'class': 'rounded-3' }}) }}</div>
+                   <div class="col">{{ form_row(form.name, {'attr': { 'class': 'rounded-3' }}) }}</div>
+                   <div class="col">{{ form_row(form.reference, {'attr': { 'class': 'rounded-3' }}) }}</div>
+                   <div class="col">{{ form_row(form.serial_number, {'attr': { 'class': 'rounded-3' }}) }}</div>
+                   <button class="col btn btn-dark">{{ button_label|default('Valider') }}</button>
+               </div>
+               {{ form_end(form) }}
+           </div>
+
            <div class="rounded-3">
-               <table class="table border border-2">
+               <table class="table border border-2 table-hover">
                    <thead style="background-color: darkgray;">
                    <tr>
                        <th class="text-center">Quantité</th>
@@ -27,9 +41,9 @@
                </table>
            </div>
        </div>
-       <button class="btn btn-dark">
-           <a class="text-decoration-none text-white" href="{{ path('new_product') }}">Create new</a>
-       </button>
+{#       <button class="btn btn-dark">#}
+{#           <a class="text-decoration-none text-white" href="{{ path('new_product') }}">Create new</a>#}
+{#       </button>#}
    </div>
 {#       <h1>Product index</h1>#}
 

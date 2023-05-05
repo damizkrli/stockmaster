@@ -13,30 +13,29 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/product')]
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'product', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findBy([], ['addedAt' =>  'DESC']),
-        ]);
+        $this->productRepository = $productRepository;
     }
 
-    #[Route('/new', name: 'new_product', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProductRepository $productRepository): Response
+    #[Route('/', name: 'product', methods: ['GET', 'POST'])]
+    public function index(Request $request): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $productRepository->save($product, true);
+            $this->productRepository->save($product, true);
 
             return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product/new.html.twig', [
-            'product' => $product,
-            'form' => $form,
+        return $this->render('product/index.html.twig', [
+            'products' => $this->productRepository->findBy([], ['addedAt' =>  'DESC']),
+            'form' => $form
         ]);
     }
 
@@ -52,7 +51,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product/edit.html.twig', [
+        return $this->render('product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);

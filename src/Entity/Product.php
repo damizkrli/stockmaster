@@ -22,7 +22,7 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
-    #[ORM\Column(length: 12)]
+    #[ORM\Column(length: 255)]
     private ?string $serial_number = null;
 
     #[ORM\Column]
