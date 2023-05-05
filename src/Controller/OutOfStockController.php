@@ -13,29 +13,29 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/out/of/stock')]
 class OutOfStockController extends AbstractController
 {
-    #[Route('/', name: 'out_of_stock', methods: ['GET'])]
-    public function index(OutOfStockRepository $outOfStockRepository): Response
+    private OutOfStockRepository $outOfStockRepository;
+
+    public function __construct(OutOfStockRepository $outOfStockRepository)
     {
-        return $this->render('out_of_stock/index.html.twig', [
-            'out_of_stocks' => $outOfStockRepository->findBy([], ['addedAt' => 'DESC']),
-        ]);
+        $this->outOfStockRepository = $outOfStockRepository;
     }
 
-    #[Route('/new', name: 'new_out_of_stock', methods: ['GET', 'POST'])]
-    public function new(Request $request, OutOfStockRepository $outOfStockRepository): Response
+    #[Route('/', name: 'out_of_stock', methods: ['GET', 'POST'])]
+    public function index(Request $request): Response
     {
         $outOfStock = new OutOfStock();
         $form = $this->createForm(OutOfStockType::class, $outOfStock);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $outOfStockRepository->save($outOfStock, true);
+            $this->outOfStockRepository->save($outOfStock, true);
 
             return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('out_of_stock/new.html.twig', [
-            'out_of_stock' => $outOfStock,
+
+        return $this->render('out_of_stock/index.html.twig', [
+            'out_of_stocks' => $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']),
             'form' => $form,
         ]);
     }
