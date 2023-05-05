@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OutOfStock index{% endblock %}
+
+{% block body %}
+    <h1>OutOfStock index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>Quantity</th>
+                <th>AddedAt</th>
+                <th>Brand</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for out_of_stock in out_of_stocks %}
+            <tr>
+                <td>{{ out_of_stock.id }}</td>
+                <td>{{ out_of_stock.name }}</td>
+                <td>{{ out_of_stock.reference }}</td>
+                <td>{{ out_of_stock.quantity }}</td>
+                <td>{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ out_of_stock.brand }}</td>
+                <td>
+                    <a href="{{ path('app_out_of_stock_show', {'id': out_of_stock.id}) }}">show</a>
+                    <a href="{{ path('app_out_of_stock_edit', {'id': out_of_stock.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_out_of_stock_new') }}">Create new</a>
+{% endblock %}
