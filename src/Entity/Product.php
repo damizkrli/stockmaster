@@ -28,6 +28,9 @@ class Product
     #[ORM\Column]
     private ?\DateTimeImmutable $addedAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $brand = null;
+
     public function __toString(): string
     {
         return $this->name;
@@ -99,6 +102,18 @@ class Product
     public function setAddedAt(\DateTimeImmutable $addedAt): self
     {
         $this->addedAt = $addedAt;
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

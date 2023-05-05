@@ -16,6 +16,7 @@ class ProductsFixtures extends Fixture
         for ($i = 0; $i < 15; $i++) {
             $product = new Product();
             $product->setName($faker->words(2, true))
+                ->setBrand($faker->words(1, true))
                 ->setReference($faker->bothify('???-###') . '-' . $faker->bothify('???'))
                 ->setSerialNumber(mt_rand(100000000000, 999999999999))
                 ->setQuantity($faker->randomDigit())
