@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/out/of/stock')]
 class OutOfStockController extends AbstractController
 {
-    #[Route('/', name: 'app_out_of_stock_index', methods: ['GET'])]
+    #[Route('/', name: 'out_of_stock', methods: ['GET'])]
     public function index(OutOfStockRepository $outOfStockRepository): Response
     {
         return $this->render('out_of_stock/index.html.twig', [
@@ -21,7 +21,7 @@ class OutOfStockController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_out_of_stock_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new_out_of_stock', methods: ['GET', 'POST'])]
     public function new(Request $request, OutOfStockRepository $outOfStockRepository): Response
     {
         $outOfStock = new OutOfStock();
@@ -31,7 +31,7 @@ class OutOfStockController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $outOfStockRepository->save($outOfStock, true);
 
-            return $this->redirectToRoute('app_out_of_stock_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('out_of_stock/new.html.twig', [
@@ -40,15 +40,7 @@ class OutOfStockController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_out_of_stock_show', methods: ['GET'])]
-    public function show(OutOfStock $outOfStock): Response
-    {
-        return $this->render('out_of_stock/show.html.twig', [
-            'out_of_stock' => $outOfStock,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_out_of_stock_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit_out_of_stock', methods: ['GET', 'POST'])]
     public function edit(Request $request, OutOfStock $outOfStock, OutOfStockRepository $outOfStockRepository): Response
     {
         $form = $this->createForm(OutOfStockType::class, $outOfStock);
@@ -57,7 +49,7 @@ class OutOfStockController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $outOfStockRepository->save($outOfStock, true);
 
-            return $this->redirectToRoute('app_out_of_stock_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('out_of_stock/edit.html.twig', [
@@ -66,13 +58,13 @@ class OutOfStockController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_out_of_stock_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'delete_out_of_stock', methods: ['POST'])]
     public function delete(Request $request, OutOfStock $outOfStock, OutOfStockRepository $outOfStockRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$outOfStock->getId(), $request->request->get('_token'))) {
             $outOfStockRepository->remove($outOfStock, true);
         }
 
-        return $this->redirectToRoute('app_out_of_stock_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
     }
 }

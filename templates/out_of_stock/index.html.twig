@@ -27,8 +27,7 @@
                 <td>{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ out_of_stock.brand }}</td>
                 <td>
-                    <a href="{{ path('app_out_of_stock_show', {'id': out_of_stock.id}) }}">show</a>
-                    <a href="{{ path('app_out_of_stock_edit', {'id': out_of_stock.id}) }}">edit</a>
+                    <a href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_out_of_stock_new') }}">Create new</a>
+    <a href="{{ path('new_out_of_stock') }}">Create new</a>
 {% endblock %}
