@@ -4,8 +4,14 @@
 
 {% block body %}
 
+    {# INVENTORY #}
+    {% include 'layout/_inventory.html.twig' %}
+
     {# PRODUCT #}
     {% include 'layout/_product.html.twig' %}
+
+    {# OUTOFSTOCK #}
+    {% include 'layout/_outofstock.html.twig' %}
 
     {# SUPPLY #}
     {% include 'layout/_supply.html.twig' %}

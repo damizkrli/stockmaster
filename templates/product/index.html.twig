@@ -11,8 +11,8 @@
            {% include 'product/_form.html.twig' %}
 
            <div class="rounded-3">
-               <table class="table border border-2 table-hover">
-                   <thead style="background-color: darkgray;">
+               <table class="table border border-2 table-hover" style=" border-radius: 15px">
+                   <thead style="background-color: lightgray;">
                    <tr>
                        <th class="text-center">Quantité</th>
                        <th class="text-center">Marque</th>
@@ -31,44 +31,6 @@
                </table>
            </div>
        </div>
-{#       <button class="btn btn-dark">#}
-{#           <a class="text-decoration-none text-white" href="{{ path('new_product') }}">Create new</a>#}
-{#       </button>#}
    </div>
-{#       <h1>Product index</h1>#}
 
-{#       <table class="table">#}
-{#           <thead>#}
-{#           <tr>#}
-{#               <th>Quantity</th>#}
-{#               <th>Name</th>#}
-{#               <th>Reference</th>#}
-{#               <th>Serial_number</th>#}
-{#               <th>AddedAt</th>#}
-{#               <th>actions</th>#}
-{#           </tr>#}
-{#           </thead>#}
-{#           <tbody>#}
-{#           {% for products in product %}#}
-{#               <tr>#}
-{#                   <td>{{ products.quantity }}</td>#}
-{#                   <td>{{ products.name }}</td>#}
-{#                   <td>{{ products.reference }}</td>#}
-{#                   <td>{{ products.serialNumber }}</td>#}
-{#                   <td>{{ products.addedAt|date('Y-m-d') }}</td>#}
-{#                   <td>#}
-{#                   </td>#}
-{#               </tr>#}
-{#           {% else %}#}
-{#               <tr>#}
-{#                   <td colspan="7">no records found</td>#}
-{#               </tr>#}
-{#           {% endfor %}#}
-{#           </tbody>#}
-{#       </table>#}
-
-{#    <button class="bnt btn-dark">#}
-{#        <a href="{{ path('new_product') }}">Create new</a>#}
-{#    </button>#}
-{#   </div>#}
 {% endblock %}
