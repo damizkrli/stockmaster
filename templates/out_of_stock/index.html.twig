@@ -1,83 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OutOfStock index{% endblock %}
+{% block title %}📤 HORS-STOCK{% endblock %}
 
 {% block body %}
 
-    <div class="container">
+    <div class="container-fluid mt-5 p-5">
+        <h2 class="pb-4 text-start font-bold font-up deep-purple-text"> 📤 HORS-STOCK</h2>
 
-        <div class="container mt-5">
-            <h2 class="pb-4 text-start font-bold font-up deep-purple-text">HORS-STOCK</h2>
+        {% include 'out_of_stock/_form.html.twig' %}
 
-            {% include 'out_of_stock/_form.html.twig' %}
-
-            <div class="rounded-3">
-                <table class="table border border-2 table-hover">
-                    <thead style="background-color: lightgray;">
+        <div class="rounded rounded-3 overflow-hidden">
+            <table class="table border border-1 shadow-sm table-hover">
+                <thead style="background-color: lightgray;">
+                <tr>
+                    <th class="text-center">Quantité</th>
+                    <th class="text-center">Marque</th>
+                    <th class="text-center">Désignation</th>
+                    <th class="text-center">Référence</th>
+                    <th class="text-center">Entrée en stock</th>
+                    <td class="text-center fw-bold" colspan="2">Actions</td>
+                </tr>
+                </thead>
+                {% for out_of_stock in out_of_stocks %}
+                    <tbody>
                     <tr>
-                        <th class="text-center">Quantité</th>
-                        <th class="text-center">Marque</th>
-                        <th class="text-center">Désignation</th>
-                        <th class="text-center">Référence</th>
-                        <th class="text-center">Entrée en stock</th>
-                        <td class="text-center fw-bold" colspan="2">Actions</td>
+                        <td class="text-center">{{ out_of_stock.quantity }}</td>
+                        <td class="text-center">{{ out_of_stock.brand|capitalize }}</td>
+                        <td class="text-center">{{ out_of_stock.name }}</td>
+                        <td class="text-center">{{ out_of_stock.reference }}</td>
+                        <td class="text-center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/Y') }}</td>
+                        <td class="text-center"><a class="btn btn-dark"
+                                                   href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">Modifier</a>
+                        <td class="text-center">{{ include('out_of_stock/_delete_form.html.twig') }}</td>
                     </tr>
-                    </thead>
-                    {% for out_of_stock in out_of_stocks %}
-                        <tbody>
-                        <tr>
-                            <td class="text-center">{{ out_of_stock.quantity }}</td>
-                            <td class="text-center">{{ out_of_stock.brand|capitalize }}</td>
-                            <td class="text-center">{{ out_of_stock.name }}</td>
-                            <td class="text-center">{{ out_of_stock.reference }}</td>
-                            <td class="text-center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('Y-m-d') }}</td>
-                            <td class="text-center"><a class="btn btn-dark" href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">Modifier</a>
-                            <td class="text-center">{{ include('out_of_stock/_delete_form.html.twig') }}</td>
-                        </tr>
-                        </tbody>
-                    {% endfor %}
-                </table>
-            </div>
+                    </tbody>
+                {% endfor %}
+            </table>
         </div>
-        {#       <button class="btn btn-dark">#}
-        {#           <a class="text-decoration-none text-white" href="{{ path('new_product') }}">Create new</a>#}
-        {#       </button>#}
     </div>
 
-{#    <h1>OutOfStock index</h1>#}
-
-{#    <table class="table">#}
-{#        <thead>#}
-{#            <tr>#}
-{#                <th>Id</th>#}
-{#                <th>Name</th>#}
-{#                <th>Reference</th>#}
-{#                <th>Quantity</th>#}
-{#                <th>AddedAt</th>#}
-{#                <th>Brand</th>#}
-{#                <th>actions</th>#}
-{#            </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for out_of_stock in out_of_stocks %}#}
-{#            <tr>#}
-{#                <td>{{ out_of_stock.id }}</td>#}
-{#                <td>{{ out_of_stock.name }}</td>#}
-{#                <td>{{ out_of_stock.reference }}</td>#}
-{#                <td>{{ out_of_stock.quantity }}</td>#}
-{#                <td>{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('Y-m-d H:i:s') : '' }}</td>#}
-{#                <td>{{ out_of_stock.brand }}</td>#}
-{#                <td>#}
-{#                    <a href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">edit</a>#}
-{#                </td>#}
-{#            </tr>#}
-{#        {% else %}#}
-{#            <tr>#}
-{#                <td colspan="7">no records found</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
-
-{#    <a href="{{ path('new_out_of_stock') }}">Create new</a>#}
 {% endblock %}
