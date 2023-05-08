@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <button class="navbar-toggler"
                 type="button"
@@ -10,28 +10,32 @@
             <i class="fas fa-bars"></i>
         </button>
         <a href="https://abaques.fr" target="_blank">
-            <img src="https://i.ibb.co/1dmMgzs/q-NX9s0159-Dr-Pz-DYU.jpg" alt="abaques-audiovisuel" border="0" class="rounded-lg">
+            <img src="https://i.ibb.co/1dmMgzs/q-NX9s0159-Dr-Pz-DYU.jpg" alt="abaques-audiovisuel" border="0"
+                 class="rounded-lg rounded rounded-3 overflow-hidden">
         </a>
         <div class="collapse navbar-collapse" id="navbarRightAlignExample">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ path('home') }}">Accueil</a>
+                    <a class="nav-link text-uppercase link" aria-current="page" href="{{ path('home') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ path('product') }}">Stock</a>
+                    <a class="nav-link text-uppercase link" aria-current="page" href="{{ path('product') }}">Stock</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ path('out_of_stock') }}">Hors-Stock</a>
+                    <a class="nav-link text-uppercase link" aria-current="page" href="{{ path('out_of_stock') }}">Hors-Stock</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Fournitures</a>
+                    <a class="nav-link text-uppercase link" href="#">Fournitures</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Inscription</a>
-                </li>
+{#                {% if user %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link text-uppercase link">Deconnexion</a>#}
+{#                    </li>#}
+{#                {% else %}#}
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase link">Connexion</a>
+                    </li>
+{#                {% endif %}#}
             </ul>
         </div>
     </div>

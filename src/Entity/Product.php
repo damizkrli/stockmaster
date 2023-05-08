@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
     #[ORM\Id]
@@ -17,6 +18,7 @@ class Product
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -39,6 +41,13 @@ class Product
     public function __construct()
     {
         $this->addedAt = new \DateTimeImmutable();
+    }
+
+    #[ORM\PrePersist]
+    private function capitalizeProperty(): void
+    {
+        $this->brand = ucwords(strtolower($this->brand));
+        $this->name = ucwords(strtolower($this->name));
     }
 
     public function getId(): ?int
