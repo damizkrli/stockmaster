@@ -4,9 +4,24 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(
+    fields: ['serial_number'],
+    message : 'Ce Produit existe déjà en base de données.'
+)]
+#[UniqueEntity(
+    fields: ['name'],
+    message: 'Ce Produit existe déjà en base de données.'
+)]
+#[UniqueEntity(
+    fields: ['reference'],
+    message: 'Ce Produit existe déjà en base de données.'
+)]
+
 class Product
 {
     #[ORM\Id]
@@ -15,23 +30,27 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(message: 'La quantité doit être de 0 ou plus.')]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert]
+    #[Assert\NotBlank(message: 'Cette valeur ne peut pas être vide.')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Cette valeur ne peut pas être vide.')]
     private ?string $reference = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez associer un numéro de série.')]
     private ?string $serial_number = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Un produit doit avoir une marque.')]
+    private ?string $brand = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $addedAt = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $brand = null;
 
     public function __toString(): string
     {
@@ -41,13 +60,6 @@ class Product
     public function __construct()
     {
         $this->addedAt = new \DateTimeImmutable();
-    }
-
-    #[ORM\PrePersist]
-    private function capitalizeProperty(): void
-    {
-        $this->brand = ucwords(strtolower($this->brand));
-        $this->name = ucwords(strtolower($this->name));
     }
 
     public function getId(): ?int
