@@ -5,9 +5,8 @@
 
 {% block body %}
 
-    <div class="container-fluid mt-5 p-5">
-        <h2 class="pb-4 text-start font-bold font-up deep-purple-text"> 📦 STOCK</h2>
-
+    <div class="container mt-5 p-5">
+        <h2 class="pb-4 text-start font-bold font-up deep-purple-text">📦 STOCK</h2>
 
         {% include 'product/_form.html.twig' %}
 
@@ -24,11 +23,9 @@
                     <td class="text-center fw-bold" colspan="2"></td>
                 </tr>
                 </thead>
-                {% for product in products %}
                     <tbody>
-                    {% include 'layout/conditions/productOff.php' %}
+                    {% include 'layout/conditions/productOff.html.twig' %}
                     </tbody>
-                {% endfor %}
             </table>
         </div>
     </div>

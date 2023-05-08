@@ -18,7 +18,7 @@ body {
     position: relative;
     color: #fff;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .link:before {
@@ -59,11 +59,12 @@ body {
 .box_jour, .box_heure, .box_minute, .box_seconde {
     padding: 10px;
     background-color: lightgray;
+    box-shadow: 1px 1px 1px;
 }
 
 #jour, #heure, #minute, #seconde {
     background:lightgray;
-    padding: 10px 20px;
+    padding: 10px 22px;
     color: black;
     font-size: 1rem;
     font-weight: bold;
