@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block title %}HORS-STOCK{% endblock %}
 
 {% block body %}
 
-    <div class="m-5 mt-5 p-5">
-        <h2 class="pb-4 text-start font-bold font-up deep-purple-text"> 📤 HORS-STOCK</h2>
+    {% include 'layout/tabs.html.twig' %}
+
+    <div class="container mt-5 p-5">
+
+        <h2 class="pb-4 text-start font-bold font-up deep-purple-text">📤 HORS-STOCK</h2>
 
         {% include 'out_of_stock/_form.html.twig' %}
 
@@ -25,7 +29,7 @@
                     <tbody>
                     <tr>
                         <td class="text-center">{{ out_of_stock.quantity }}</td>
-                        <td class="text-center">{{ out_of_stock.brand|capitalize }}</td>
+                        <td class="text-center">{{ out_of_stock.brand|title }}</td>
                         <td class="text-center">{{ out_of_stock.name }}</td>
                         <td class="text-center">{{ out_of_stock.reference }}</td>
                         <td class="text-center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/Y') }}</td>

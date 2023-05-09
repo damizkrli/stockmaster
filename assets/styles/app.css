@@ -18,7 +18,7 @@ body {
     position: relative;
     color: #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 22px;
 }
 
 .link:before {
@@ -72,6 +72,14 @@ body {
 
 #jour_label, #heure_label, #minute_label, #seconde_label {
     font-size: 1rem;
+}
+
+/* TABS */
+
+a .nav-item:focus .nav-item:active .nav-item:focus .nav-item:focus-within .nav-item:target .nav-item:hover .nav-item:focus-visible {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 5px !important;
 }
 
 /*FOOTER*/

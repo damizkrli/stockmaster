@@ -24,7 +24,7 @@
                             </svg>
                         </td>
                         <td class="text-center">{{ outOfStock.quantity }}</td>
-                        <td class="text-center">{{ outOfStock.brand | capitalize }}</td>
+                        <td class="text-center">{{ outOfStock.brand | title }}</td>
                         <td class="text-center">{{ outOfStock.name }}</td>
                         <td class="text-center">{{ outOfStock.reference }}</td>
                         <td class="text-center">{{ outOfStock.addedAt ? outOfStock.addedAt|date('Y-m-d') }}</td>

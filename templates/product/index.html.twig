@@ -5,13 +5,16 @@
 
 {% block body %}
 
+    {% include 'layout/tabs.html.twig' %}
+
     <div class="container mt-5 p-5">
+
         <h2 class="pb-4 text-start font-bold font-up deep-purple-text">📦 STOCK</h2>
 
         {% include 'product/_form.html.twig' %}
 
-                <div class="rounded rounded-3 overflow-hidden">
-            <table class="table border border-1 shadow-sm table-hover" style=" border-radius: 15px">
+        <div class="rounded rounded-3 overflow-hidden">
+            <table class="table border border-1 shadow-sm table-hover">
                 <thead style="background-color: lightgray;">
                 <tr>
                     <th class="text-center">Quantité</th>
@@ -23,9 +26,9 @@
                     <td class="text-center fw-bold" colspan="2"></td>
                 </tr>
                 </thead>
-                    <tbody>
-                    {% include 'layout/conditions/productOff.html.twig' %}
-                    </tbody>
+                <tbody>
+                {% include 'layout/conditions/productOff.html.twig' %}
+                </tbody>
             </table>
         </div>
     </div>
