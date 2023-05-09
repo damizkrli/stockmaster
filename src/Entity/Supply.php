@@ -26,6 +26,9 @@ class Supply
     #[ORM\Column]
     private ?\DateTimeImmutable $addedAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $brand = null;
+
     public function __construct()
     {
         $this->addedAt = new \DateTimeImmutable();
@@ -85,6 +88,18 @@ class Supply
     public function setAddedAt(\DateTimeImmutable $addedAt): self
     {
         $this->addedAt = $addedAt;
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

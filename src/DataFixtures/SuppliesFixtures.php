@@ -16,6 +16,7 @@ class SuppliesFixtures extends Fixture
         for ($i = 0; $i < 15; $i++) {
             $product = new Supply();
             $product->setName($faker->words(2, true))
+                ->setBrand($faker->words(2, true))
                 ->setReference($faker->bothify('???-###') . '-' . $faker->bothify('???'))
                 ->setQuantity($faker->randomDigit())
             ;

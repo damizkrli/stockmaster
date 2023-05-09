@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4 mb-4 text-center">Modifier #{{ supply.id }} </h1>
+
+        {{ include('supply/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        <a class="btn btn-dark" href="{{ path('supply') }}">Retour</a>
+
+    </div>
+{% endblock %}

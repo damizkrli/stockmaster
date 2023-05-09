@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}STOCK{% endblock %}
+
+{% block body %}
+
+    {% include 'layout/tabs.html.twig' %}
+
+    <div class="container mt-5 p-5">
+
+        <h2 class="pb-4 text-start font-bold font-up deep-purple-text">🧰 FOURNITURES</h2>
+
+        {% include 'supply/_form.html.twig' %}
+
+        <div class="rounded rounded-3 overflow-hidden">
+            <table class="table border border-1 shadow-sm table-hover">
+                <thead style="background-color: lightgray;">
+                <tr>
+                    <th class="text-center">Quantité</th>
+                    <th class="text-center">Marque</th>
+                    <th class="text-center">Désignation</th>
+                    <th class="text-center">Référence</th>
+                    <th class="text-center">Entrée en stock</th>
+                    <td class="text-end fw-bold" colspan="2"></td>
+                </tr>
+                </thead>
+                {% for supply in supplies %}
+                    {% if supply.quantity > 0 %}
+                        <tbody>
+                        <tr>
+                            <td class="text-center">{{ supply.quantity }}</td>
+                            <td class="text-center">{{ supply.brand|title }}</td>
+                            <td class="text-center">{{ supply.name | title }}</td>
+                            <td class="text-center">{{ supply.reference }}</td>
+                            <td class="text-center">{{ supply.addedAt ? supply.addedAt|date('Y-m-d') }}</td>
+                            <td class="text-end me-0">
+                                <a class="btn btn-outline-dark btn-sm"
+                                   href="{{ path('edit_supply', {'id': supply.id}) }}">Modifier</a>
+                            </td>
+                            <td class="text-start ms-0">{{ include('supply/_delete_form.html.twig') }}</td>
+                        </tr>
+                        </tbody>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
