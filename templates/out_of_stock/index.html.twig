@@ -22,7 +22,7 @@
                     <th class="text-center">Désignation</th>
                     <th class="text-center">Référence</th>
                     <th class="text-center">Entrée en stock</th>
-                    <td class="text-center fw-bold" colspan="2">Actions</td>
+                    <td class="text-center fw-bold" colspan="2"></td>
                 </tr>
                 </thead>
                 {% for out_of_stock in out_of_stocks %}
@@ -33,9 +33,9 @@
                         <td class="text-center">{{ out_of_stock.name }}</td>
                         <td class="text-center">{{ out_of_stock.reference }}</td>
                         <td class="text-center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/Y') }}</td>
-                        <td class="text-center"><a class="btn btn-dark"
+                        <td class="text-end"><a class="btn btn-outline-dark btn-sm"
                                                    href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">Modifier</a>
-                        <td class="text-center">{{ include('out_of_stock/_delete_form.html.twig') }}</td>
+                        <td class="text-start">{{ include('out_of_stock/_delete_form.html.twig') }}</td>
                     </tr>
                     </tbody>
                 {% endfor %}
