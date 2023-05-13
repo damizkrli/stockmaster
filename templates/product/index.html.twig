@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block title %}STOCK{% endblock %}
 
@@ -17,24 +16,24 @@
             </h2>
         </div>
 
-        <div class="rounded rounded-3 overflow-hidden">
-            <table class="table border border-1 shadow-sm table-hover">
-                <thead style="background-color: lightgray;">
-                <tr>
-                    <th class="text-center"></th>
-                    <th class="text-center">Marque</th>
-                    <th class="text-center">Désignation</th>
-                    <th class="text-center">Référence</th>
-                    <th class="text-center">Numéro de série</th>
-                    <th class="text-center">Entrée en stock</th>
-                    <td class="text-center fw-bold" colspan="3"></td>
-                </tr>
-                </thead>
-                <tbody>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">Qté</th>
+                <th class="text-center">Marque</th>
+                <th class="text-center">Désignation</th>
+                <th class="text-center">Référence</th>
+                <th class="text-center">Numéro de série</th>
+                <th class="text-center">Entrée en stock</th>
+                <td class="text-center fw-bold" colspan="2"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
                 {% include 'layout/conditions/productOff.html.twig' %}
-                </tbody>
-            </table>
-        </div>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}
