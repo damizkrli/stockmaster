@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block title %}HORS-STOCK{% endblock %}
 
@@ -7,40 +6,64 @@
 
     {% include 'layout/tabs.html.twig' %}
 
-    <div class="container mt-5 p-5">
+    <div class="container mt-5">
 
-        <h2 class="pb-4 text-start font-bold font-up deep-purple-text">📤 HORS-STOCK</h2>
+        <div class="d-flex flex-row align-items-center justify-content-start mb-4">
+            <h2 class="text-start font-bold font-up deep-purple-text me-3">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#addOutOfStockModal">
+                    📦 Ajout de hors-stock
+                </button>
+            </h2>
+        </div>
 
-        {% include 'out_of_stock/_form.html.twig' %}
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
+            <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits non disponible</label>
+        </div>
 
-        <div class="rounded rounded-3 overflow-hidden">
-            <table class="table border border-1 shadow-sm table-hover">
-                <thead style="background-color: lightgray;">
-                <tr>
-                    <th class="text-center">Quantité</th>
-                    <th class="text-center">Marque</th>
-                    <th class="text-center">Désignation</th>
-                    <th class="text-center">Référence</th>
-                    <th class="text-center">Entrée en stock</th>
-                    <td class="text-center fw-bold" colspan="2"></td>
-                </tr>
-                </thead>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">Qté</th>
+                <th class="text-center">Marque</th>
+                <th class="text-center">Désignation</th>
+                <th class="text-center">Référence</th>
+                <th class="text-center">Entrée en stock</th>
+                <td class="text-center fw-bold" colspan="2">Actions</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
                 {% for out_of_stock in out_of_stocks %}
-                    <tbody>
-                    <tr>
-                        <td class="text-center">{{ out_of_stock.quantity }}</td>
-                        <td class="text-center">{{ out_of_stock.brand|title }}</td>
-                        <td class="text-center">{{ out_of_stock.name }}</td>
-                        <td class="text-center">{{ out_of_stock.reference }}</td>
-                        <td class="text-center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/Y') }}</td>
-                        <td class="text-end"><a class="btn btn-outline-dark btn-sm"
-                                                   href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">Modifier</a>
-                        <td class="text-start">{{ include('out_of_stock/_delete_form.html.twig') }}</td>
-                    </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
+            <tr {% if out_of_stock.quantity == 0 %}class="zero-quantity"{% endif %}>
+                <td class="text-center">{{ out_of_stock.quantity }}</td>
+                <td class="text-center">{{ out_of_stock.brand | title }}</td>
+                <td class="text-center">{{ out_of_stock.name | title }}</td>
+                <td class="text-center">{{ out_of_stock.reference }}</td>
+                <td class="text-center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/y') }}</td>
+                <td class="text-end me-0">
+                    <span class="d-flex align-items-center justify-content-around">
+                        <button class="btn btn-outline-warning btn-sm">
+                        <a class="text-decoration-none" href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                    </button>
+                    {{ include('out_of_stock/_delete_form.html.twig') }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+
+            {% include 'layout/modal/_modal_add_out_of_stock.html.twig' %}
+
+            </tbody>
+        </table>
+        <div class="d-flex align-items-end justify-content-end">
+            <a href="{{ path('export_out_of_stock_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">📄 Export PDF</a>
         </div>
     </div>
+
+    {% include 'layout/script/export.html.twig' %}
 
 {% endblock %}

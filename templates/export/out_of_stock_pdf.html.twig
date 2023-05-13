@@ -1,0 +1,28 @@
+{% block body %}
+    <div class="export-product">
+        <h1>Hors Stock au {{ "now"|date("d/m/Y") }}</h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Désignation</th>
+                <th>Référence</th>
+                <th>Marque</th>
+                <th>Quantité</th>
+                <th>Date d'ajout</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.name | title }}</td>
+                    <td>{{ item.reference }}</td>
+                    <td>{{ item.brand | title }}</td>
+                    <td>{{ item.quantity }} Unité(s)</td>
+                    <td>{{ item.addedAt | date('d/m/y') }}</td>
+                    <!-- Ajoutez plus de colonnes selon vos besoins -->
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

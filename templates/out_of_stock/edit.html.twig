@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit OutOfStock{% endblock %}
+{% block title %}Modifier{% endblock %}
 
 {% block body %}
-    <h1>Edit OutOfStock</h1>
+    <div class="container mt-5">
+        <h1 class="mt-4 mb-4 text-center">{{ out_of_stock.name }} </h1>
 
-    {{ include('out_of_stock/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        {{ include('out_of_stock/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('out_of_stock') }}">Retour</a>
+        <a class="btn btn-dark" href="{{ path('out_of_stock') }}">Retour</a>
 
-    {{ include('out_of_stock/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

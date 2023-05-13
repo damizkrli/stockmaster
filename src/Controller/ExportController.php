@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\OutOfStock;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -19,12 +20,12 @@ class ExportController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/export-pdf', name: 'export_pdf')]
-    public function exportToPdf(): Response
+    #[Route('/export-product-pdf', name: 'export_product_pdf')]
+    public function exportProductToPdf(): Response
     {
         $data = $this->entityManager->getRepository(Product::class)->findAll();
 
-        $html = $this->renderView('export/pdf.html.twig', [
+        $html = $this->renderView('export/product_pdf.html.twig', [
             'data' => $data
         ]);
 
@@ -36,6 +37,26 @@ class ExportController extends AbstractController
         return new Response($dompdf->output(), Response::HTTP_OK, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="export.pdf"'
+        ]);
+    }
+
+    #[Route('/export-out-of-stock-pdf', name: 'export_out_of_stock_pdf')]
+    public function exportOutOfStockToPdf(): Response
+    {
+        $data = $this->entityManager->getRepository(OutOfStock::class)->findAll();
+
+        $html = $this->renderView('export/out_of_stock_pdf.html.twig', [
+            'data' => $data
+        ]);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'Portrait');
+        $dompdf->render();
+
+        return new Response($dompdf->output(), Response::HTTP_OK, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="export_hors_stock.pdf"'
         ]);
     }
 }
