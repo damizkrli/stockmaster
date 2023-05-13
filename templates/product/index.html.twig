@@ -12,7 +12,7 @@
             <h2 class="text-start font-bold font-up deep-purple-text me-3">
                 <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
                         data-bs-target="#addModal">
-                    📦 STOCK
+                    📦 Ajout de stock
                 </button>
             </h2>
         </div>
@@ -21,7 +21,6 @@
             <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
             <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits en rupture</label>
         </div>
-
 
         <table class="table table-bordered table-hover">
             <thead>
@@ -62,6 +61,9 @@
 
             </tbody>
         </table>
+        <div class="d-flex align-items-end justify-content-end">
+            <a href="{{ path('export_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">📄 Export PDF</a>
+        </div>
     </div>
 
 <script>

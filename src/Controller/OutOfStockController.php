@@ -34,7 +34,7 @@ class OutOfStockController extends AbstractController
         }
 
 
-        return $this->render('out_of_stock/index.html.twig', [
+        return $this->render('out_of_stock/pdf.html.twig', [
             'out_of_stocks' => $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']),
             'form' => $form,
         ]);
