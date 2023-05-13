@@ -6,7 +6,6 @@ use App\Entity\Product;
 use App\Entity\OutOfStock;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
-use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
