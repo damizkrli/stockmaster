@@ -8,10 +8,15 @@
             <td class="text-center">{{ product.serialNumber }}</td>
             <td class="text-center">{{ product.addedAt ? product.addedAt|date('Y-m-d') }}</td>
             <td class="text-end me-0">
-                <a class="btn btn-outline-dark btn-sm"
-                   href="{{ path('edit_product', {'id': product.id}) }}">Modifier</a>
+                <button class="btn btn-outline-warning">
+                    <i class="fa-regular fa-lightbulb">
+                        {{ path('edit_product', {'id': product.id}) }}
+                    </i>
+                </button>
             </td>
             <td class="text-start ms-0">{{ include('product/_delete_form.html.twig') }}</td>
         </tr>
     {% endif %}
 {% endfor %}
+
+    {% include 'layout/modal/_modal_add.html.twig' %}

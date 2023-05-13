@@ -7,23 +7,27 @@
 
     {% include 'layout/tabs.html.twig' %}
 
-    <div class="container mt-5 p-5">
+    <div class="container mt-5">
 
-        <h2 class="pb-4 text-start font-bold font-up deep-purple-text">📦 STOCK</h2>
-
-        {% include 'product/_form.html.twig' %}
+        <div class="d-flex flex-row align-items-center justify-content-start mb-4">
+            <h2 class="text-start font-bold font-up deep-purple-text me-3">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+                    📦 STOCK
+                </button>
+            </h2>
+        </div>
 
         <div class="rounded rounded-3 overflow-hidden">
             <table class="table border border-1 shadow-sm table-hover">
                 <thead style="background-color: lightgray;">
                 <tr>
-                    <th class="text-center">Quantité</th>
+                    <th class="text-center"></th>
                     <th class="text-center">Marque</th>
                     <th class="text-center">Désignation</th>
                     <th class="text-center">Référence</th>
                     <th class="text-center">Numéro de série</th>
                     <th class="text-center">Entrée en stock</th>
-                    <td class="text-center fw-bold" colspan="2"></td>
+                    <td class="text-center fw-bold" colspan="3"></td>
                 </tr>
                 </thead>
                 <tbody>
