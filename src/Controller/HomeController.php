@@ -31,7 +31,7 @@ class HomeController extends AbstractController
         $outOfStock = $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']);
         $supplies = $this->supplyRepository->findBy([], ['addedAt' => 'DESC']);
 
-        return $this->render('home/pdf.html.twig', [
+        return $this->render('home/index.html.twig', [
             'products' => $products,
             'outOfStocks' => $outOfStock,
             'supplies' => $supplies,

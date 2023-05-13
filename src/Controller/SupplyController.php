@@ -33,7 +33,7 @@ class SupplyController extends AbstractController
             return $this->redirectToRoute('supply', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('supply/pdf.html.twig', [
+        return $this->render('supply/index.html.twig', [
             'supplies' => $this->supplyRepository->findBy([], ['addedAt' => 'DESC']),
             'form' => $form,
         ]);
