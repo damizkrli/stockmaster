@@ -20,7 +20,7 @@ class SupplyController extends AbstractController
         $this->supplyRepository = $supplyRepository;
     }
 
-    #[Route('/', name: 'supply', methods: ['GET'])]
+    #[Route('/', name: 'supply', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         $supply = new Supply();
@@ -36,14 +36,6 @@ class SupplyController extends AbstractController
         return $this->render('supply/index.html.twig', [
             'supplies' => $this->supplyRepository->findBy([], ['addedAt' => 'DESC']),
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'show_supply', methods: ['GET'])]
-    public function show(Supply $supply): Response
-    {
-        return $this->render('supply/show.html.twig', [
-            'supply' => $supply,
         ]);
     }
 
