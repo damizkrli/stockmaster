@@ -1,10 +1,8 @@
 <script>
     function copyToClipboard(button) {
-        // Obtenir le contenu de la ligne de tableau
         var tableRow = button.parentNode.parentNode;
         var rowData = '';
 
-        // Parcourir les éléments de la ligne de tableau
         for (var i = 0; i < tableRow.cells.length; i++) {
             var cell = tableRow.cells[i];
             if (!cell.classList.contains('exclude-from-clipboard')) {
@@ -12,26 +10,29 @@
             }
         }
 
-        // Supprimer le dernier caractère de tabulation de la ligne de données
         rowData = rowData.slice(0, -1);
 
-        // Créer un élément temporaire pour copier le contenu
         var tempInput = document.createElement("input");
         tempInput.value = rowData;
         document.body.appendChild(tempInput);
 
-        // Sélectionner le contenu de l'élément temporaire
         tempInput.select();
         tempInput.setSelectionRange(0, 99999); // Pour les navigateurs mobiles
 
-        // Copier le contenu dans le presse-papiers
         document.execCommand("copy");
 
-        // Supprimer l'élément temporaire
         document.body.removeChild(tempInput);
 
-        // Afficher un message de confirmation
-        alert("Contenu copié dans le presse-papiers : " + rowData);
-    }
+        var flashToast = document.getElementById("flash-toast");
+        var flashMessage = document.getElementById("flash-message");
+        flashMessage.innerText = "Copié dans le presse-papiers.";
+        var toast = new bootstrap.Toast(flashToast);
+        toast.show();
 
+        var closeButton = flashToast.querySelector(".close");
+        closeButton.addEventListener("click", function() {
+            var toast = bootstrap.Toast.getInstance(flashToast);
+            toast.hide();
+        });
+    }
 </script>

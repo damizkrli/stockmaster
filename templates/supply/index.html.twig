@@ -4,6 +4,20 @@
 
 {% block body %}
 
+
+    <div class=" d-flex align-items-end justify-content-end">
+        <div id="flash-toast" class="toast position-fixed toast-top-left m-3" role="alert" aria-live="assertive"
+             aria-atomic="true" data-delay="2000" data-autohide="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <div class="toast-body" id="flash-message"></div>
+                </div>
+                <button type="button" class="btn-close btn-close-dark me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     {% include 'layout/tabs.html.twig' %}
 
     <div class="container mt-5">
@@ -60,7 +74,7 @@
                 <td class="d-flex align-items-center justify-content-center border-end-0">
                     <button class="btn btn-outline-info btn-sm exclude-from-clipboard" onclick="copyToClipboard(this)">
                         <i class="fa-regular fa-copy"></i>
-{#                        <small>Copier/coller</small>#}
+                        {#                        <small>Copier/coller</small> #}
                     </button>
                 </td>
                 <td class="text-end me-0">
@@ -68,7 +82,7 @@
                         <button class="btn btn-outline-warning btn-sm exclude-from-clipboard">
                         <a class="text-decoration-none" href="{{ path('edit_supply', {'id': supply.id}) }}">
                             <i class="fa-regular fa-pen-to-square"></i>
-{#                            <small>Éditer</small>#}
+{#                            <small>Éditer</small> #}
                         </a>
                     </button>
                     {{ include('supply/_delete_form.html.twig') }}
@@ -92,43 +106,6 @@
 
     {% include 'layout/script/export.html.twig' %}
 
-{#    {% include 'layout/script/clipboard.html.twig' %}#}
-    <script>
-        function copyToClipboard(button) {
-            // Obtenir le contenu de la ligne de tableau
-            var tableRow = button.parentNode.parentNode;
-            var rowData = '';
-
-            // Parcourir les éléments de la ligne de tableau
-            for (var i = 0; i < tableRow.cells.length; i++) {
-                var cell = tableRow.cells[i];
-                if (!cell.classList.contains('exclude-from-clipboard')) {
-                    rowData += cell.innerText + '\t'; // Ajouter le contenu de la cellule à la ligne de données
-                }
-            }
-
-            // Supprimer le dernier caractère de tabulation de la ligne de données
-            rowData = rowData.slice(0, -1);
-
-            // Créer un élément temporaire pour copier le contenu
-            var tempInput = document.createElement("input");
-            tempInput.value = rowData;
-            document.body.appendChild(tempInput);
-
-            // Sélectionner le contenu de l'élément temporaire
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999); // Pour les navigateurs mobiles
-
-            // Copier le contenu dans le presse-papiers
-            document.execCommand("copy");
-
-            // Supprimer l'élément temporaire
-            document.body.removeChild(tempInput);
-
-            // Afficher un message de confirmation
-            alert("Contenu copié dans le presse-papiers : " + rowData);
-        }
-
-    </script>
+    {% include 'layout/script/clipboard.html.twig' %}
 
 {% endblock %}
