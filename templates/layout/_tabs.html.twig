@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link text-black fs-5" href="{{ path('home') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-black fs-5" href="{{ path('product') }}">Stock</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-black fs-5" href="{{ path('out_of_stock') }}">Hors-Stock</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-black fs-5" href="{{ path('supply') }}">Fournitures</a>
+        </li>
+    </ul>
+</div>
+
+<script>
+    window.onload = function() {
+        var links = document.querySelectorAll('.nav-link');
+        var currentUrl = window.location.pathname;
+
+        for (var i = 0; i < links.length; i++) {
+            var linkUrl = links[i].getAttribute('href');
+            if (linkUrl === currentUrl) {
+                links[i].classList.add('active');
+                break;
+            }
+        }
+    };
+</script>

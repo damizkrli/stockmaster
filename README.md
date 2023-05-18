@@ -21,3 +21,20 @@ On souhaite donner la possibilité aux stockmans des différentes agences d'admi
 
 ### À quoi ressemble l'application
 Lors de l'ouverture de l'application, on arrive sur la page d'accueil qui contient 3 tableaux pour les 3 différents stocks. L'application dispose d'une barre de navigation qui contient 3 boutons menant chacun à une page différente qui contient les différents stocks. L'arrivée sur chaque page permet de voir : une barre de recherche, pour effectuer une recherche avec une saisie prédictive et une recherche multicritère. On voit également un tableau qui contient les produits dont l'ordre sera prédéfini par ordre alphabétique. Au-dessus du tableau, on dispose d'un bouton ajouter : ce bouton faire apparaitre une fenêtre modale avec des champs pour ajouter les informations du produit. Lorsque le formulaire est soumis à validation, un message de validation apparaît ou un message d'erreur si une contrainte n'est pas respectées.
+
+Nom possible
+"StockSense"
+"InventoVault"
+"StockMinder"
+"StorifyPro"
+"StockWise"
+"StockSaver"
+"StockHive"
+"InvenTrack"
+"StockSync"
+"StockPulse"
+"StockNexus"
+"Storago"
+"StockMaster"
+"StockSphere"
+"StockPedia"

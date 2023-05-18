@@ -1,0 +1,25 @@
+/*COUNTDOWN*/
+
+.box-rebours{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.box_jour, .box_heure, .box_minute, .box_seconde {
+    padding: 10px;
+    background-color: var(--var-white);
+    box-shadow: 1px 1px 1px;
+}
+
+#jour, #heure, #minute, #seconde {
+    background: var(--var-white);
+    padding: 10px 22px;
+    color: var(--var-black);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#jour_label, #heure_label, #minute_label, #seconde_label {
+    font-size: 1rem;
+}

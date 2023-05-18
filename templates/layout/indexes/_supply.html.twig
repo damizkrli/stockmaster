@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <h2 class="pb-4 text-start font-bold font-up deep-purple-text">🧰 FOURNITURES</h2>
+    <div class="rounded rounded-3 overflow-hidden">
+        <table class="table border border-1 shadow-sm">
+            <thead style="background-color: lightgray;">
+            <tr>
+                <th></th>
+                <th>Désignation</th>
+                <th>Référence</th>
+                <th>Entrée en stock</th>
+                <th class="text-end">Quantité</th>
+            </tr>
+            </thead>
+            {% for supply in supplies %}
+                <tbody>
+                {% if supply.quantity < 2 %}
+                    <tr>
+                        <td class="text-center">
+                            <i class="fa-solid fa-circle-exclamation" style="color: #ff0000;"></i>
+                        </td>
+                        <td>{{ supply.name }}</td>
+                        <td>{{ supply.reference }}</td>
+                        <td>{{ supply.addedAt ? supply.addedAt|date('Y-m-d') }}</td>
+                        <td class="text-end">{{ supply.quantity }},00</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>

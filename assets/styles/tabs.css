@@ -1,0 +1,18 @@
+/* TABS */
+
+.nav-link.active {
+    background-color: #383d4b !important;
+    color: var(--var-white) !important;
+}
+
+.nav-item .nav-link {
+    border-radius: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+thead>tr {
+    background-color: #383d4b;
+    color: var(--var-white);
+}
+

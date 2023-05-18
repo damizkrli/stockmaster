@@ -6,7 +6,7 @@
 
     {% include 'layout/_toast.html.twig' %}
 
-    {% include 'layout/tabs.html.twig' %}
+    {% include 'layout/_tabs.html.twig' %}
 
     <div class="container mt-5">
 
@@ -17,6 +17,13 @@
                     📦 Ajout de fournitures
                 </button>
             </h2>
+        </div>
+
+        <div class="d-flex align-items-end justify-content-end">
+            <a href="{{ path('export_product_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
+                <i class="fa-regular fa-file-pdf"></i>
+                Export PDF
+            </a>
         </div>
 
         <div class="form-check form-switch mb-3">
@@ -59,23 +66,16 @@
                 <td class="text-center">{{ supply.name | title }}</td>
                 <td class="text-center">{{ supply.reference }}</td>
                 <td class="text-center">{{ supply.addedAt ? supply.addedAt|date('d/m/y') }}</td>
-                <td class="d-flex align-items-center justify-content-center border-end-0">
-                    <button class="btn btn-outline-info btn-sm exclude-from-clipboard" onclick="copyToClipboard(this)">
+                <td class="text-end me-0 d-flex align-items-center justify-content-evenly">
+                    <button class="btn btn-outline-dark btn-sm exclude-from-clipboard" onclick="copyToClipboard(this)">
                         <i class="fa-regular fa-copy"></i>
-                        {#                        <small>Copier/coller</small> #}
                     </button>
-                </td>
-                <td class="text-end me-0">
-                    <span class="d-flex align-items-center justify-content-around">
-                        <button class="btn btn-outline-warning btn-sm exclude-from-clipboard">
+                    <button class="btn btn-outline-dark btn-sm exclude-from-clipboard">
                         <a class="text-decoration-none" href="{{ path('edit_supply', {'id': supply.id}) }}">
                             <i class="fa-regular fa-pen-to-square"></i>
-{#                            <small>Éditer</small> #}
                         </a>
                     </button>
                     {{ include('supply/_delete_form.html.twig') }}
-
-                    </span>
                 </td>
             </tr>
             {% endfor %}
@@ -84,12 +84,6 @@
 
             </tbody>
         </table>
-        <div class="d-flex align-items-end justify-content-end">
-            <a href="{{ path('export_supply_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
-                <i class="fa-regular fa-file-pdf"></i>
-                Export PDF
-            </a>
-        </div>
     </div>
 
     {% include 'layout/script/export.html.twig' %}
