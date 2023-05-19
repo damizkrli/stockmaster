@@ -1,7 +1,7 @@
 /*NAVBAR*/
 
 .navbar {
-    background-color: #616161;
+    background-color: var(--var-header-footer);
 }
 
 .link {

@@ -1,10 +1,10 @@
 <script>
     function copyToClipboard(button) {
-        var tableRow = button.parentNode.parentNode;
-        var rowData = '';
+        let tableRow = button.parentNode.parentNode;
+        let rowData = '';
 
-        for (var i = 0; i < tableRow.cells.length; i++) {
-            var cell = tableRow.cells[i];
+        for (let i = 0; i < tableRow.cells.length; i++) {
+            let cell = tableRow.cells[i];
             if (!cell.classList.contains('exclude-from-clipboard')) {
                 rowData += cell.innerText + '\t'; // Ajouter le contenu de la cellule à la ligne de données
             }
@@ -12,7 +12,7 @@
 
         rowData = rowData.slice(0, -1);
 
-        var tempInput = document.createElement("input");
+        let tempInput = document.createElement("input");
         tempInput.value = rowData;
         document.body.appendChild(tempInput);
 
@@ -23,15 +23,15 @@
 
         document.body.removeChild(tempInput);
 
-        var flashToast = document.getElementById("flash-toast");
-        var flashMessage = document.getElementById("flash-message");
-        flashMessage.innerText = "Copié dans le presse-papiers.";
-        var toast = new bootstrap.Toast(flashToast);
+        let flashToast = document.getElementById("flash-toast");
+        let flashMessage = document.getElementById("flash-message");
+        flashMessage.innerText = "Informations dans le presse-papiers.";
+        let toast = new bootstrap.Toast(flashToast);
         toast.show();
 
-        var closeButton = flashToast.querySelector(".close");
+        let closeButton = flashToast.querySelector(".close");
         closeButton.addEventListener("click", function() {
-            var toast = bootstrap.Toast.getInstance(flashToast);
+            let toast = bootstrap.Toast.getInstance(flashToast);
             toast.hide();
         });
     }

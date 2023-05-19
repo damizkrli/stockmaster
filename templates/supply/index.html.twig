@@ -31,38 +31,38 @@
             <label class="form-check-label" for="hideZeroCheckbox">Masquer les fournitures en rupture</label>
         </div>
 
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
             <thead>
             <tr>
-                <th class="text-center">Marque</th>
-                <th class="text-center">Désignation</th>
-                <th class="text-center">Référence</th>
-                <th class="text-center">Entrée en stock</th>
-                <th class="text-center">Qté</th>
+                <th class="text-start">Qté</th>
+                <th>Marque</th>
+                <th>Désignation</th>
+                <th>Référence</th>
+                <th>Entrée en stock</th>
                 <td class="text-center fw-bold" colspan="2">Actions</td>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                {% for supply in supplies %}
-            <tr {% if supply.quantity == 0 %}class="zero-quantity"{% endif %}>
-                <td class="text-center">{{ supply.brand | title }}</td>
-                <td class="text-center">{{ supply.name | title }}</td>
-                <td class="text-center">{{ supply.reference }}</td>
-                <td class="text-center">{{ supply.addedAt ? supply.addedAt|date('d/m/y') }}</td>
-                <td class="text-center">{{ supply.quantity }}</td>
-                <td class="text-end me-0 d-flex align-items-center justify-content-evenly">
-                    <button class="btn btn-outline-dark btn-sm exclude-from-clipboard" onclick="copyToClipboard(this)">
-                        <i class="fa-regular fa-copy"></i>
-                    </button>
-                    <button class="btn btn-outline-dark btn-sm exclude-from-clipboard">
-                        <a class="text-decoration-none" href="{{ path('edit_supply', {'id': supply.id}) }}">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                        </a>
-                    </button>
-                    {{ include('supply/_delete_form.html.twig') }}
-                </td>
-            </tr>
+            {% for supply in supplies %}
+                <tr {% if supply.quantity == 0 %}class="zero-quantity"{% endif %}>
+                    <td class="text-start">{{ supply.quantity }},00</td>
+                    <td>{{ supply.brand | title }}</td>
+                    <td>{{ supply.name | title }}</td>
+                    <td>{{ supply.reference }}</td>
+                    <td>{{ supply.addedAt ? supply.addedAt|date('d/m/y') }}</td>
+                    <td class="text-end me-0 d-flex align-items-end justify-content-evenly">
+                        <button class="btn btn-outline-dark btn-sm exclude-from-clipboard me-2"
+                                onclick="copyToClipboard(this)">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                        <button class="btn btn-outline-dark btn-sm exclude-from-clipboard me-2">
+                            <a class="text-decoration-none" href="{{ path('edit_supply', {'id': supply.id}) }}">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                        </button>
+                        {{ include('supply/_delete_form.html.twig') }}
+                    </td>
+                </tr>
             {% endfor %}
 
             {% include 'layout/modal/_modal_add_supply.html.twig' %}

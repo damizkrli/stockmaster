@@ -1,7 +1,19 @@
 {% block body %}
+    <style>
+    .table-bordered {
+    border-collapse: collapse;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+    border: 1px solid black;
+    padding: 5px;
+    }
+    </style>
+
     <div class="export-product">
         <h1>Hors Stock au {{ "now"|date("d/m/Y") }}</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="border-spacing: 0">
             <thead>
             <tr>
                 <th>Désignation</th>
