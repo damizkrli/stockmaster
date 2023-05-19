@@ -20,3 +20,11 @@ body {
 .btn-dark a {
     background-color: var(--var-button-app);
 }
+
+a {
+    color: var(--var-black);
+}
+
+a:hover {
+    color: var(--var-white);
+}

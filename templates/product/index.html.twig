@@ -4,6 +4,8 @@
 
 {% block body %}
 
+    {% include 'layout/_toast.html.twig' %}
+
     {% include 'layout/_tabs.html.twig' %}
 
     <div class="container mt-5">
@@ -17,6 +19,13 @@
             </h2>
         </div>
 
+        <div class="d-flex align-items-end justify-content-end">
+            <a href="{{ path('export_product_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
+                <i class="fa-regular fa-file-pdf"></i>
+                Export PDF
+            </a>
+        </div>
+
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
             <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits en rupture</label>
@@ -25,12 +34,12 @@
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th class="text-center">Qté</th>
                 <th class="text-center">Marque</th>
                 <th class="text-center">Désignation</th>
                 <th class="text-center">Référence</th>
                 <th class="text-center">Numéro de série</th>
                 <th class="text-center">Entrée en stock</th>
+                <th class="text-center">Qté</th>
                 <td class="text-center fw-bold" colspan="2">Actions</td>
             </tr>
             </thead>
@@ -38,22 +47,24 @@
             <tr>
                 {% for product in products %}
             <tr {% if product.quantity == 0 %}class="zero-quantity"{% endif %}>
-                <td class="text-center">{{ product.quantity }}</td>
                 <td class="text-center">{{ product.brand | title }}</td>
                 <td class="text-center">{{ product.name | title }}</td>
                 <td class="text-center">{{ product.reference }}</td>
                 <td class="text-center">{{ product.serialNumber }}</td>
                 <td class="text-center">{{ product.addedAt ? product.addedAt|date('d/m/y') }}</td>
-                <td class="text-end me-0">
-                    <span class="d-flex align-items-center justify-content-around">
-                        <button class="btn btn-outline-warning btn-sm">
-                        <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">
+                <td class="text-center">{{ product.quantity }}</td>
+                <td class="text-end me-0 d-flex align-items-center justify-content-evenly">
+                    <button class="btn btn-outline-dark btn-sm exclude-from-clipboard" onclick="copyToClipboard(this)">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                    <button class="btn btn-outline-dark btn-sm exclude-from-clipboard">
+                        <a class="text-decoration-none" href="{{ path('edit_supply', {'id': product.id}) }}">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
                     </button>
                     {{ include('product/_delete_form.html.twig') }}
-                    </span>
                 </td>
+
             </tr>
             {% endfor %}
 
@@ -61,11 +72,10 @@
 
             </tbody>
         </table>
-        <div class="d-flex align-items-end justify-content-end">
-            <a href="{{ path('export_product_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">📄 Export PDF</a>
-        </div>
     </div>
 
     {% include 'layout/script/export.html.twig' %}
+
+    {% include 'layout/script/clipboard.html.twig' %}
 
 {% endblock %}
