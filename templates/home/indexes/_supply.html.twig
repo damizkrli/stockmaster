@@ -1,0 +1,29 @@
+<div class="container">
+    <h2 class="title">🧰 Fournitures</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="center"></th>
+            <th class="start">Qté</th>
+            <th class="large-cells">Désignation</th>
+            <th class="large-cells">Référence</th>
+            <th class="large-cells">Entrée en stock</th>
+        </tr>
+        </thead>
+        {% for supply in supplies %}
+            <tbody>
+            {% if supply.quantity < 2 %}
+                <tr>
+                    <td class="center">
+                        <i class="fa-solid fa-circle-exclamation danger"></i>
+                    </td>
+                    <td class="start">{{ supply.quantity }},00</td>
+                    <td>{{ supply.name }}</td>
+                    <td>{{ supply.reference }}</td>
+                    <td>{{ supply.addedAt ? supply.addedAt|date('Y-m-d') }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        {% endfor %}
+    </table>
+</div>

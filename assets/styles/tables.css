@@ -1,9 +1,29 @@
 /* TABLES */
 
+.table {
+    border: 1px var(--var-border);
+    box-shadow: 1rem .125rem .25rem rgba(var(--var-black), .075);
+}
+
+thead {
+    background-color: lightgray;
+}
+
 tbody {
     background-color: var(--var-white);
 }
 
-.last-cell {
-    height: 100%;
+/* style width: 20% */
+.little-cells {
+    width: 20%;
+}
+
+/* style width: 25% */
+.medium-cells {
+    width: 25%;
+}
+
+/* style width: 33% */
+.large-cells {
+    width: 33%;
 }

@@ -1,0 +1,31 @@
+<div class="container">
+    <h2 class="title">📤 HORS-STOCK</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="center"></th>
+            <th class="start">Qté</th>
+            <th class="medium-cells">Marque</th>
+            <th class="medium-cells">Désignation</th>
+            <th class="medium-cells">Référence</th>
+            <th class="medium-cells">Entrée en stock</th>
+        </tr>
+        </thead>
+        {% for outOfStock in outOfStocks %}
+            <tbody>
+            {% if outOfStock.quantity < 2 %}
+                <tr>
+                    <td class="center">
+                        <i class="fa-solid fa-circle-exclamation danger"></i>
+                    </td>
+                    <td class="start">{{ outOfStock.quantity }},00</td>
+                    <td>{{ outOfStock.brand | title }}</td>
+                    <td>{{ outOfStock.name }}</td>
+                    <td>{{ outOfStock.reference }}</td>
+                    <td>{{ outOfStock.addedAt ? outOfStock.addedAt|date('Y-m-d') }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        {% endfor %}
+    </table>
+</div>

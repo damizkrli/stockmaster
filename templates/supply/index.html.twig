@@ -11,7 +11,7 @@
     <div class="container mt-5">
 
         <div class="d-flex flex-row align-items-center justify-content-start mb-4">
-            <h2 class="text-start font-bold font-up deep-purple-text me-3">
+            <h2 class="text-start font-bold font-up me-3">
                 <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
                         data-bs-target="#addModal">
                     📦 Ajout de fournitures
@@ -35,11 +35,11 @@
             <thead>
             <tr>
                 <th class="text-start">Qté</th>
-                <th>Marque</th>
-                <th>Désignation</th>
-                <th>Référence</th>
-                <th>Entrée en stock</th>
-                <td class="text-center fw-bold" colspan="2">Actions</td>
+                <th style="width: 25%">Marque</th>
+                <th style="width: 25%">Désignation</th>
+                <th style="width: 25%">Référence</th>
+                <th style="width: 25%">Entrée en stock</th>
+                <th class="text-center fw-bold" colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -51,11 +51,11 @@
                     <td>{{ supply.reference }}</td>
                     <td>{{ supply.addedAt ? supply.addedAt|date('d/m/y') }}</td>
                     <td class="text-end me-0 d-flex align-items-end justify-content-evenly">
-                        <button class="btn btn-outline-dark btn-sm exclude-from-clipboard me-2"
+                        <button class="btn btn-outline-dark btn-sm me-2"
                                 onclick="copyToClipboard(this)">
                             <i class="fa-regular fa-copy"></i>
                         </button>
-                        <button class="btn btn-outline-dark btn-sm exclude-from-clipboard me-2">
+                        <button class="btn btn-outline-dark btn-sm me-2">
                             <a class="text-decoration-none" href="{{ path('edit_supply', {'id': supply.id}) }}">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </a>

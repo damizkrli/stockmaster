@@ -28,3 +28,36 @@ a {
 a:hover {
     color: var(--var-white);
 }
+
+.title {
+    text-align: start;
+    padding-bottom: 32px;
+    text-transform: uppercase;
+}
+
+.start {
+    text-align: start;
+}
+
+.center {
+    text-align: center;
+}
+
+.end {
+    text-align: end;
+}
+
+.danger {
+    color: var(--var-danger);
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.validation {
+    color: var(--var-validation);
+}
+
+.container {
+    margin-top: 80px;
+}
+
