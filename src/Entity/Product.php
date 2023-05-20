@@ -13,15 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
     fields: ['serial_number'],
     message : 'Ce Produit existe déjà en base de données.'
 )]
-#[UniqueEntity(
-    fields: ['name'],
-    message: 'Ce Produit existe déjà en base de données.'
-)]
-#[UniqueEntity(
-    fields: ['reference'],
-    message: 'Ce Produit existe déjà en base de données.'
-)]
-
 class Product
 {
     #[ORM\Id]
