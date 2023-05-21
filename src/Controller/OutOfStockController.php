@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\OutOfStock;
 use App\Form\OutOfStockType;
 use App\Repository\OutOfStockRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class OutOfStockController extends AbstractController
 {
     private OutOfStockRepository $outOfStockRepository;
+    private PaginatorInterface $paginator;
 
-    public function __construct(OutOfStockRepository $outOfStockRepository)
-    {
+    public function __construct(
+        OutOfStockRepository $outOfStockRepository,
+        PaginatorInterface $paginator
+    ) {
         $this->outOfStockRepository = $outOfStockRepository;
+        $this->paginator = $paginator;
     }
 
     #[Route('/', name: 'out_of_stock', methods: ['GET', 'POST'])]
@@ -27,14 +32,24 @@ class OutOfStockController extends AbstractController
         $form = $this->createForm(OutOfStockType::class, $outOfStock);
         $form->handleRequest($request);
 
+        $outOfStockQuery = $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']);
+
+        $outOfStocks = $this->paginator->paginate(
+            $outOfStockQuery,
+            $request->query->getInt('page', 1),
+            8
+        );
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $newOutOfStock = $form->getData();
             $this->outOfStockRepository->save($outOfStock, true);
+            $this->addFlash('success', 'Votre produit à été ajouté au hors-stock.');
 
             return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('out_of_stock/index.html.twig', [
-            'out_of_stocks' => $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']),
+            'out_of_stocks' => $outOfStocks,
             'form' => $form,
         ]);
     }
