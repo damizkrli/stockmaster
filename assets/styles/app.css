@@ -1,7 +1,7 @@
 @import "_vars.css";
 @import "countdown.css";
-@import "footer.css";
 @import "navbar.css";
+@import "pagination.css";
 @import "tables.css";
 @import "tabs.css";
 
@@ -18,7 +18,7 @@ body {
 }
 
 .btn-dark a {
-    background-color: var(--var-button-app);
+    background-color: var(--var-first-color);
 }
 
 a {
@@ -60,4 +60,3 @@ a:hover {
 .container {
     margin-top: 80px;
 }
-

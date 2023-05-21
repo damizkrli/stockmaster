@@ -1,0 +1,23 @@
+/* PAGINATION */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.page-link {
+    background-color: var(--var-first-color);
+    color: var(--var-white);
+    border: var(--var-validation);
+}
+
+.active>.page-link, .page-link.active {
+    background-color: var(--var-validation);
+}
+
+.page-link:hover {
+    background-color: var(--var-first-color);
+    color: var(--var-white);
+}
