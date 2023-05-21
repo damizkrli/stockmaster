@@ -69,6 +69,11 @@
 
             </tbody>
         </table>
+
+        <div class="pagination disable">
+            {{ knp_pagination_render(out_of_stocks) }}
+        </div>
+
     </div>
 
     {% include 'layout/script/export.html.twig' %}
