@@ -1,14 +1,12 @@
-<div class=" d-flex align-items-end justify-content-end">
-    <div id="flash-toast" class="toast position-fixed toast-top-left m-3" role="alert" aria-live="assertive"
-         aria-atomic="true" data-delay="2000" data-autohide="true">
-        <div class="d-flex" style="background-color: black; color: white;">
-            <div class="toast-body">
-                <div class="toast-body" id="flash-message">
+{% for type, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="toast position-fixed top-0 end-0 m-4 bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body d-flex align-item-center">
+                <div class="justify-content-center">
+                    <i class="fa-regular fa-circle-check" style="color: #8aff97;"></i>
+                    {{ message }}
                 </div>
             </div>
-            <button type="button" class="btn-close btn-close-dark me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close">
-            </button>
         </div>
-    </div>
-</div>
+    {% endfor %}
+{% endfor %}
