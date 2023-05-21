@@ -43,7 +43,7 @@ class OutOfStockController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newOutOfStock = $form->getData();
             $this->outOfStockRepository->save($outOfStock, true);
-            $this->addFlash('success', 'Votre produit à été ajouté au hors-stock.');
+            $this->addFlash('success', 'Votre produit à été ajouté.');
 
             return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
@@ -62,6 +62,7 @@ class OutOfStockController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $outOfStockRepository->save($outOfStock, true);
+            $this->addFlash('success', 'Votre produit à été modifié.');
 
             return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
@@ -77,6 +78,7 @@ class OutOfStockController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$outOfStock->getId(), $request->request->get('_token'))) {
             $outOfStockRepository->remove($outOfStock, true);
+            $this->addFlash('success', 'Votre produit à été supprimé.');
         }
 
         return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
