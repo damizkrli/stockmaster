@@ -19,17 +19,16 @@
             </h2>
         </div>
 
-        <div class="d-flex align-items-end justify-content-end">
-            <a href="{{ path('export_product_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
-                <i class="fa-regular fa-file-pdf"></i>
-                Export PDF
-            </a>
-        </div>
-
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
             <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits en rupture</label>
         </div>
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
 
         <table class="table table-hover">
             <thead>
@@ -76,5 +75,9 @@
     {% include 'layout/script/export.html.twig' %}
 
     {% include 'layout/script/clipboard.html.twig' %}
+
+    <div class="pagination">
+        {{ knp_pagination_render(products) }}
+    </div>
 
 {% endblock %}
