@@ -1,11 +1,9 @@
 :root {
     --var-bgc: #F1F1F1;
     --var-border: #dee2e6;
-    --var-title-table: #383d4b;
-    --var-button-app: #383d4b;
     --var-white: white;
     --var-black: black;
-    --var-header-footer: #383d4b;
+    --var-first-color: #383d4b;
     --var-danger: #DC3545;
     --var-validation: #198754;
 }
