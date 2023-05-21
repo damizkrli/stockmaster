@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,6 +71,7 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->save($product, true);
+            $this->addFlash('success', 'Votre produit a été modifié avec succès.');
 
             return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
         }
@@ -85,6 +87,8 @@ class ProductController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product, true);
+            $this->addFlash('success', 'Votre produit a été supprimé avec succès.');
+
         }
 
         return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);

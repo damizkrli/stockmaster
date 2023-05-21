@@ -8,10 +8,10 @@
 
     {% include 'layout/_tabs.html.twig' %}
 
-    <div class="container mt-5">
+    <div class="container">
 
-        <div class="d-flex flex-row align-items-center justify-content-start mb-4">
-            <h2 class="text-start font-bold font-up me-3">
+        <div class="title">
+            <h2 class="start me-3">
                 <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
                         data-bs-target="#addModal">
                     📦 Ajout de stock
@@ -31,22 +31,16 @@
             <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits en rupture</label>
         </div>
 
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th class="text-start">Qté</th>
-                    <th style="width: 20%">Marque</th>
-                    <th style="width: 20%">Désignation</th>
-                    <th style="width: 20%">Référence</th>
-{#                    <th style="width: 20%">Numéro de série</th>#}
-                    <th style="width: 20%">Entrée en stock</th>
-                    <th class="text-center fw-bold" colspan="2">Actions</th>
+                    <th class="start">Qté</th>
+                    <th class="little-cells">Marque</th>
+                    <th class="little-cells">Désignation</th>
+                    <th class="little-cells">Référence</th>
+                    <th class="little-cells">Numéro de série</th>
+                    <th class="little-cells">Entrée en stock</th>
+                    <th class="center" colspan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,15 +50,15 @@
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
                     <td>{{ product.reference }}</td>
-{#                    <td>{{ product.serialNumber }}</td>#}
+                    <td>{{ product.serialNumber }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
-                    <td class="text-end me-0 d-flex align-items-center justify-content-evenly">
+                    <td class="end me-0 d-flex align-items-center justify-content-evenly">
                         <button class="btn btn-outline-dark btn-sm me-2"
                                 onclick="copyToClipboard(this)">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                         <button class="btn btn-outline-dark btn-sm me-2">
-                            <a class="text-decoration-none" href="{{ path('edit_supply', {'id': product.id}) }}">
+                            <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </a>
                         </button>
@@ -78,7 +72,7 @@
             </tbody>
         </table>
 
-        <div class="pagination disable" style="position: fixed; bottom: 0;">
+        <div class="pagination disable">
             {{ knp_pagination_render(products) }}
         </div>
 
@@ -87,5 +81,7 @@
     {% include 'layout/script/export.html.twig' %}
 
     {% include 'layout/script/clipboard.html.twig' %}
+
+    {% include 'layout/script/toast.html.twig' %}
 
 {% endblock %}

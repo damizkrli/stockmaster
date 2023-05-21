@@ -4,7 +4,15 @@
 
 {% block body %}
 
-    {% include 'layout/_toast.html.twig' %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="toast align-items-center text-white bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                {{ flashMessage }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
 
     {% include 'layout/_tabs.html.twig' %}
 
@@ -72,5 +80,19 @@
     </div>
 
     {% include 'layout/script/export.html.twig' %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sélectionner tous les toasts
+            var toasts = document.querySelectorAll('.toast');
+
+            // Initialiser les toasts Bootstrap
+            var toastList = new bootstrap.Toast(toasts);
+
+            // Afficher les toasts
+            toastList.show();
+        });
+
+    </script>
 
 {% endblock %}

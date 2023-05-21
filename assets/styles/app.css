@@ -31,7 +31,7 @@ a:hover {
 
 .title {
     text-align: start;
-    padding-bottom: 32px;
+    padding-bottom: 12px;
     text-transform: uppercase;
 }
 
@@ -58,5 +58,5 @@ a:hover {
 }
 
 .container {
-    margin-top: 80px;
+    margin-top: 45px;
 }
