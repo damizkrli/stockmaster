@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private ProductRepository $productRepository;
+    private PaginatorInterface $paginator;
 
-    public function __construct(ProductRepository $productRepository)
-    {
+    public function __construct(
+        ProductRepository $productRepository,
+        PaginatorInterface $paginator
+    ) {
         $this->productRepository = $productRepository;
+        $this->paginator = $paginator;
     }
 
     #[Route('/', name: 'product', methods: ['GET', 'POST'])]
@@ -27,15 +32,25 @@ class ProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
+        $productsQuery = $this->productRepository->findBy([], ['addedAt' => 'DESC']);
+
+        $products = $this->paginator->paginate(
+            $productsQuery,
+            $request->query->getInt('page', 1),
+            8
+        );
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->productRepository->save($product, true);
+            $newProduct = $form->getData();
+            $this->productRepository->save($newProduct, true);
+            $this->addFlash('success', 'Votre produit a été ajouté avec succès.');
 
             return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('product/index.html.twig', [
-            'products' => $this->productRepository->findBy([], ['addedAt' =>  'DESC']),
-            'form' => $form
+            'products' => $products,
+            'form'     => $form->createView(),
         ]);
     }
 
