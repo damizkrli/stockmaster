@@ -3,9 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OutOfStockRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OutOfStockRepository::class)]
 class OutOfStock
@@ -25,14 +23,14 @@ class OutOfStock
     private ?int $quantity = null;
 
     #[ORM\Column]
-    private ?DateTimeImmutable $addedAt = null;
+    private ?\DateTimeImmutable $addedAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $brand = null;
 
     public function __construct()
     {
-        $this->addedAt = new DateTimeImmutable();
+        $this->addedAt = new \DateTimeImmutable();
     }
 
     public function __toString(): string
@@ -81,18 +79,12 @@ class OutOfStock
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable|null
-     */
-    public function getAddedAt(): ?DateTimeImmutable
+    public function getAddedAt(): ?\DateTimeImmutable
     {
         return $this->addedAt;
     }
 
-    /**
-     * @param DateTimeImmutable|null $addedAt
-     */
-    public function setAddedAt(?DateTimeImmutable $addedAt): void
+    public function setAddedAt(?\DateTimeImmutable $addedAt): void
     {
         $this->addedAt = $addedAt;
     }
@@ -108,5 +100,4 @@ class OutOfStock
 
         return $this;
     }
-
 }

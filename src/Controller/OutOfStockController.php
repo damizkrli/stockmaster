@@ -33,7 +33,6 @@ class OutOfStockController extends AbstractController
             return $this->redirectToRoute('out_of_stock', [], Response::HTTP_SEE_OTHER);
         }
 
-
         return $this->render('out_of_stock/index.html.twig', [
             'out_of_stocks' => $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']),
             'form' => $form,

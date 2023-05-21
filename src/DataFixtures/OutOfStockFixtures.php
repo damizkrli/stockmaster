@@ -13,11 +13,11 @@ class OutOfStockFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 15; ++$i) {
             $product = new OutOfStock();
             $product->setName($faker->words(2, true))
                 ->setBrand($faker->words(1, true))
-                ->setReference($faker->bothify('???-###') . '-' . $faker->bothify('???'))
+                ->setReference($faker->bothify('???-###').'-'.$faker->bothify('???'))
                 ->setQuantity($faker->randomDigit())
             ;
 
@@ -31,5 +31,4 @@ class OutOfStockFixtures extends Fixture
     {
         return [OutOfStockFixtures::class];
     }
-
 }

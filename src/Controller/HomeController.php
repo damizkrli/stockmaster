@@ -26,7 +26,8 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'home')]
-    public function index(): Response {
+    public function index(): Response
+    {
         $products = $this->productRepository->findBy([], ['addedAt' => 'DESC']);
         $outOfStock = $this->outOfStockRepository->findBy([], ['addedAt' => 'DESC']);
         $supplies = $this->supplyRepository->findBy([], ['addedAt' => 'DESC']);

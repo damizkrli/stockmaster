@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use App\Entity\OutOfStock;
+use App\Entity\Product;
 use App\Entity\Supply;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
-use FontLib\Table\Type\name;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +26,7 @@ class ExportController extends AbstractController
         $data = $this->entityManager->getRepository(Product::class)->findAll();
 
         $html = $this->renderView('export/product_pdf.html.twig', [
-            'data' => $data
+            'data' => $data,
         ]);
 
         $dompdf = new Dompdf();
@@ -37,7 +36,7 @@ class ExportController extends AbstractController
 
         return new Response($dompdf->output(), Response::HTTP_OK, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="export.pdf"'
+            'Content-Disposition' => 'inline; filename="export.pdf"',
         ]);
     }
 
@@ -47,7 +46,7 @@ class ExportController extends AbstractController
         $data = $this->entityManager->getRepository(OutOfStock::class)->findAll();
 
         $html = $this->renderView('export/out_of_stock_pdf.html.twig', [
-            'data' => $data
+            'data' => $data,
         ]);
 
         $dompdf = new Dompdf();
@@ -57,7 +56,7 @@ class ExportController extends AbstractController
 
         return new Response($dompdf->output(), Response::HTTP_OK, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="export_hors_stock.pdf"'
+            'Content-Disposition' => 'inline; filename="export_hors_stock.pdf"',
         ]);
     }
 
@@ -67,7 +66,7 @@ class ExportController extends AbstractController
         $data = $this->entityManager->getRepository(Supply::class)->findBy([], ['addedAt' => 'ASC']);
 
         $html = $this->renderView('export/supply_pdf.html.twig', [
-            'data' => $data
+            'data' => $data,
         ]);
 
         $dompdf = new Dompdf();
@@ -77,7 +76,7 @@ class ExportController extends AbstractController
 
         return new Response($dompdf->output(), Response::HTTP_OK, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="export_hors_stock.pdf"'
+            'Content-Disposition' => 'inline; filename="export_hors_stock.pdf"',
         ]);
     }
 }

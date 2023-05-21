@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,31 +17,31 @@ class ProductType extends AbstractType
             ->add('quantity', IntegerType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Quantité'
+                    'placeholder' => 'Quantité',
                 ],
             ])
             ->add('brand', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Marque'
+                    'placeholder' => 'Marque',
                 ],
             ])
             ->add('name', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Désignation'
+                    'placeholder' => 'Désignation',
                 ],
             ])
             ->add('reference', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Référence'
+                    'placeholder' => 'Référence',
                 ],
             ])
             ->add('serial_number', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Numéro de série'
+                    'placeholder' => 'Numéro de série',
                 ],
             ])
         ;

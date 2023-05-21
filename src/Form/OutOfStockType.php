@@ -17,26 +17,26 @@ class OutOfStockType extends AbstractType
             ->add('quantity', IntegerType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Quantité'
-                ]
+                    'placeholder' => 'Quantité',
+                ],
             ])
             ->add('brand', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Marque'
-                ]
+                    'placeholder' => 'Marque',
+                ],
             ])
             ->add('name', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Désignation'
-                ]
+                    'placeholder' => 'Désignation',
+                ],
             ])
             ->add('reference', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Référence'
-                ]
+                    'placeholder' => 'Référence',
+                ],
             ])
         ;
     }

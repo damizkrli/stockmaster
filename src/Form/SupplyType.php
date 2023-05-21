@@ -16,27 +16,27 @@ class SupplyType extends AbstractType
         $builder
             ->add('quantity', IntegerType::class, [
                 'label' => false,
-                'attr'  => [
-                    'placeholder' => 'Quantité'
-                ]
+                'attr' => [
+                    'placeholder' => 'Quantité',
+                ],
             ])
             ->add('name', TextType::class, [
                 'label' => false,
-                'attr'  => [
-                    'placeholder' => 'Désignation'
-                ]
+                'attr' => [
+                    'placeholder' => 'Désignation',
+                ],
             ])
             ->add('reference', TextType::class, [
                 'label' => false,
-                'attr'  => [
-                    'placeholder' => 'Référence'
-                ]
+                'attr' => [
+                    'placeholder' => 'Référence',
+                ],
             ])
             ->add('brand', TextType::class, [
                 'label' => false,
-                'attr'  => [
-                    'placeholder' => 'Marque'
-                ]
+                'attr' => [
+                    'placeholder' => 'Marque',
+                ],
             ]);
     }
 
