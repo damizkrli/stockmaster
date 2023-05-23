@@ -43,7 +43,7 @@ class SupplyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newSupply = $form->getData();
             $this->supplyRepository->save($supply, true);
-            $this->addFlash('success', 'Votre fourniture à été ajouté.');
+            $this->addFlash('success', 'Votre fourniture à été ajoutée avec succès.');
 
             return $this->redirectToRoute('supply', [], Response::HTTP_SEE_OTHER);
         }
@@ -62,7 +62,7 @@ class SupplyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $supplyRepository->save($supply, true);
-            $this->addFlash('success', 'Votre fourniture a été modifié avec succès.');
+            $this->addFlash('success', 'Votre fourniture a été modifiée avec succès.');
 
             return $this->redirectToRoute('supply', [], Response::HTTP_SEE_OTHER);
         }
