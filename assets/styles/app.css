@@ -60,3 +60,9 @@ a:hover {
 .container {
     margin-top: 45px;
 }
+
+.export {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}

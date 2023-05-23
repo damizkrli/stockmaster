@@ -27,3 +27,9 @@ tbody {
 .large-cells {
     width: 33%;
 }
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
