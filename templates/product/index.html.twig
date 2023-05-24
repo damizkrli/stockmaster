@@ -28,10 +28,15 @@
 
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
-            <label class="form-check-label" for="hideZeroCheckbox">Afficher les produits en bientôt en rupture</label>
+            <label class="form-check-label" for="hideZeroCheckbox">Masquer les fournitures en rupture</label>
         </div>
 
-        <table class="table table-hover">
+        <div id="loading-overlay" class="loading" style="display: none;">
+            <div class="spinner d-flex align-items-center justify-content-center"></div>
+            <h2 class="center">Chargement en cours...</h2>
+        </div>
+
+        <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
                 <th class="start">Qté</th>
@@ -43,9 +48,10 @@
                 <th class="center" colspan="2">Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body">
             {% for product in products %}
-                <tr {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
+                <tr id="spinner-row"
+                    {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
                     <td class="start">{{ product.quantity }},00</td>
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
@@ -53,10 +59,6 @@
                     <td>{{ product.serialNumber }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td class="end me-0 buttons">
-                        <button class="btn btn-outline-dark btn-sm me-2"
-                                onclick="copyToClipboard(this)">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
                         <button class="btn btn-outline-dark btn-sm me-2">
                             <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">
                                 <i class="fa-regular fa-pen-to-square"></i>
@@ -78,10 +80,6 @@
 
     </div>
 
-    {% include 'layout/script/export.html.twig' %}
-
-    {% include 'layout/script/clipboard.html.twig' %}
-
-    {% include 'layout/script/toast.html.twig' %}
+    {{ encore_entry_script_tags('spinner') }}
 
 {% endblock %}
