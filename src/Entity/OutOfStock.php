@@ -4,8 +4,15 @@ namespace App\Entity;
 
 use App\Repository\OutOfStockRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OutOfStockRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(
+    fields: ['serial_number'],
+    message : 'Ce Produit existe déjà en base de données.'
+)]
 class OutOfStock
 {
     #[ORM\Id]
@@ -14,12 +21,28 @@ class OutOfStock
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Cette valeur ne peut pas être vide.')]
+    #[Assert\Length(
+        min: '3',
+        max: '75',
+        minMessage: 'La désignation ne doit pas être inférieure à {{ limit }} caractères',
+        maxMessage: 'La désignation ne doit pas être supérieure à {{ limit }} caractères',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Cette valeur ne peut pas être vide.')]
+    #[Assert\Length(
+        min: '3',
+        max: '75',
+        minMessage: 'La référence ne doit pas être inférieure à {{ limit }} caractères',
+        maxMessage: 'La référence ne doit pas être supérieure à {{ limit }} caractères',
+    )]
     private ?string $reference = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero(message: 'La quantité doit être de 0 ou plus.')]
+    #[Assert\NotBlank(message: 'Cette valeur ne peut être vide.')]
     private ?int $quantity = null;
 
     #[ORM\Column]
