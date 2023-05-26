@@ -22,22 +22,47 @@ class Product
 
     #[ORM\Column]
     #[Assert\PositiveOrZero(message: 'La quantité doit être de 0 ou plus.')]
+    #[Assert\NotBlank(message: 'Cette valeur ne peut être vide.')]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Cette valeur ne peut pas être vide.')]
+    #[Assert\Length(
+        min: '3',
+        max: '75',
+        minMessage: 'La désignation ne doit pas être inférieure à {{ limit }} caractères',
+        maxMessage: 'La désignation ne doit pas être supérieure à {{ limit }} caractères',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Cette valeur ne peut pas être vide.')]
+    #[Assert\Length(
+        min: '3',
+        max: '75',
+        minMessage: 'La référence ne doit pas être inférieure à {{ limit }} caractères',
+        maxMessage: 'La référence ne doit pas être supérieure à {{ limit }} caractères',
+    )]
     private ?string $reference = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez associer un numéro de série.')]
+    #[Assert\Length(
+        min: '3',
+        max: '75',
+        minMessage: 'Le numéro de série ne doit pas être inférieur à {{ limit }} caractères',
+        maxMessage: 'Le numéro de série ne doit pas être supérieur à {{ limit }} caractères',
+    )]
     private ?string $serial_number = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Un produit doit avoir une marque.')]
+    #[Assert\Length(
+        min: '3',
+        max: '50',
+        minMessage: 'La marque ne doit pas être inférieure à {{ limit }} caractères',
+        maxMessage: 'La marque ne doit pas être supérieure à {{ limit }} caractères',
+    )]
     private ?string $brand = null;
 
     #[ORM\Column]
