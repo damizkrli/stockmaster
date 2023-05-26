@@ -31,7 +31,12 @@
             <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits non disponible</label>
         </div>
 
-        <table class="table table-hover">
+        <div id="loading-overlay" class="loading" style="display: none;">
+            <div class="spinner d-flex align-items-center justify-content-center"></div>
+            <h2 class="center">Chargement en cours...</h2>
+        </div>
+
+        <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
                 <th class="start">Qté</th>
@@ -44,7 +49,8 @@
             </thead>
             <tbody>
             {% for out_of_stock in out_of_stocks %}
-                <tr {% if out_of_stock.quantity == 0 %}class="zero-quantity"{% endif %}>
+                <tr id="spinner-now"
+                        {% if out_of_stock.quantity == 0 %}class="zero-quantity"{% endif %}>
                     <td class="start">{{ out_of_stock.quantity }},00</td>
                     <td>{{ out_of_stock.brand | title }}</td>
                     <td>{{ out_of_stock.name | title }}</td>
@@ -75,5 +81,7 @@
         </div>
 
     </div>
+
+    {{ encore_entry_script_tags('spinner') }}
 
 {% endblock %}
