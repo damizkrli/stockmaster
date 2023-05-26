@@ -49,6 +49,13 @@ class OutOfStock
     private ?\DateTimeImmutable $addedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Un produit doit avoir une marque.')]
+    #[Assert\Length(
+        min: '3',
+        max: '50',
+        minMessage: 'La marque ne doit pas être inférieure à {{ limit }} caractères',
+        maxMessage: 'La marque ne doit pas être supérieure à {{ limit }} caractères',
+    )]
     private ?string $brand = null;
 
     public function __construct()
