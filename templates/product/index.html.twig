@@ -59,6 +59,10 @@
                     <td>{{ product.serialNumber }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td class="end me-0 buttons">
+                        <button class="btn btn-outline-dark btn-sm me-2"
+                                onclick="copyToClipboard(this)">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
                         <button class="btn btn-outline-dark btn-sm me-2">
                             <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">
                                 <i class="fa-regular fa-pen-to-square"></i>

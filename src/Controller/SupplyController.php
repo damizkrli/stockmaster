@@ -49,7 +49,7 @@ class SupplyController extends AbstractController
         }
 
         return $this->render('supply/index.html.twig', [
-            'supplies' => $this->supplyRepository->findBy([], ['addedAt' => 'DESC']),
+            'supplies' => $supplies,
             'form' => $form->createView(),
         ]);
     }

@@ -69,12 +69,14 @@
 
             </tbody>
         </table>
+
+        <div class="pagination disable">
+            {{ knp_pagination_render(supplies) }}
+        </div>
+
     </div>
 
-    {% include 'layout/script/export.html.twig' %}
-
-    {% include 'layout/script/clipboard.html.twig' %}
-
-    {% include 'layout/script/toast.html.twig' %}
+{#    {% include 'layout/script/clipboard.html.twig' %}#}
+    {{ encore_entry_script_tags('clipboard') }}
 
 {% endblock %}
