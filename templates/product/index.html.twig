@@ -45,31 +45,30 @@
                 <th class="little-cells">Référence</th>
                 <th class="little-cells">Numéro de série</th>
                 <th class="little-cells">Entrée en stock</th>
-                <th class="center" colspan="2">Actions</th>
+{#                <th class="center" colspan="2">Actions</th>#}
             </tr>
             </thead>
             <tbody id="table-body">
             {% for product in products %}
-                <tr id="spinner-row"
-                    {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
+                <tr id="spinner-row" {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
                     <td class="start">{{ product.quantity }},00</td>
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
                     <td>{{ product.reference }}</td>
                     <td>{{ product.serialNumber }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
-                    <td class="end me-0 buttons">
-                        <button class="btn btn-outline-dark btn-sm me-2"
-                                onclick="copyToClipboard(this)">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                        <button class="btn btn-outline-dark btn-sm me-2">
-                            <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>
-                        </button>
-                        {{ include('product/_delete_form.html.twig') }}
-                    </td>
+{#                    <td class="end me-0 buttons">#}
+{#                        <button class="btn btn-outline-dark btn-sm me-2"#}
+{#                                onclick="copyToClipboard(this)">#}
+{#                            <i class="fa-regular fa-copy"></i>#}
+{#                        </button>#}
+{#                        <button class="btn btn-outline-dark btn-sm me-2">#}
+{#                            <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">#}
+{#                                <i class="fa-regular fa-pen-to-square"></i>#}
+{#                            </a>#}
+{#                        </button>#}
+{#                        {{ include('product/_delete_form.html.twig') }}#}
+{#                    </td>#}
                 </tr>
             {% endfor %}
 
@@ -85,5 +84,12 @@
     </div>
 
     {{ encore_entry_script_tags('spinner') }}
+
+    <script>
+        function redirectToProduct(url) {
+            window.location.href = url;
+        }
+    </script>
+
 
 {% endblock %}

@@ -25,7 +25,6 @@ Encore
     .addEntry('tabs', './assets/js/tabs.js')
     .addEntry('export', './assets/js/export.js')
     .addEntry('toast', './assets/js/toast.js')
-    .addEntry('clipboard', './assets/js/clipboard.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
