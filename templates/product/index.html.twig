@@ -27,8 +27,13 @@
         </div>
 
         <div class="form-check form-switch mb-3">
-            <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
-            <label class="form-check-label" for="hideZeroCheckbox">Masquer les fournitures en rupture</label>
+            <input class="form-check-input" type="checkbox" id="showLessCheckbox">
+            <label class="form-check-label" for="showLessCheckbox">Afficher les produits dont la quantité est inférieure à 5</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="showMoreCheckbox">
+            <label class="form-check-label" for="showMoreCheckbox">Afficher les produits dont la quantité est supérieure à 5</label>
         </div>
 
         <div id="loading-overlay" class="loading" style="display: none;">
@@ -84,5 +89,6 @@
     </div>
 
     {{ encore_entry_script_tags('spinner') }}
+    {{ encore_entry_script_tags('filter') }}
 
 {% endblock %}
