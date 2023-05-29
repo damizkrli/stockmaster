@@ -10,40 +10,39 @@
 
     <div class="container">
 
-        <div class="title">
-            <h2 class="start me-3">
-                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#addModal">
-                    📦 Ajout de stock
-                </button>
-            </h2>
-        </div>
-
-        <div class="export">
-            <a href="{{ path('export_product_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
-                <i class="fa-regular fa-file-pdf"></i>
-                Export PDF
-            </a>
-        </div>
-
         <div id="loading-overlay" class="loading" style="display: none;">
             <div class="spinner d-flex align-items-center justify-content-center"></div>
             <h2 class="center">Chargement en cours...</h2>
         </div>
 
+        <div class="mb-2">
+            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#addModal">
+                Ajout de stock
+            </button>
+            <button class="btn btn-outline-danger btn-sm">Supprimer</button>
+            <button class="btn btn-outline-dark btn-sm">
+                <a href="{{ path('export_product_pdf') }}" target="_blank" style="text-decoration: none">
+                    Exporter en PDF
+                </a>
+            </button>
+            <button id="selectAllCheckbox" class="btn btn-outline-info btn-sm">Tout sélectionner</button>
+        </div>
+
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
+                <th></th>
                 <th class="start little-cells" id="quantity-header">
                     <i class="fas fa-sort"></i>
                     Qté
                 </th>
                 <th class="little-cells" id="brand-header">
-                        <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort"></i>
                     Marque
                 </th>
                 <th class="little-cells" id="name-header">
-                        <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort"></i>
                     Désignation
                 </th>
                 <th class="little-cells" id="reference-header">
@@ -53,33 +52,28 @@
                     Numéro de série
                 </th>
                 <th class="medium-cells" id="added-at-header">
-                        <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort"></i>
                     Date
                 </th>
-{#                <th class="center" colspan="2">Actions</th>#}
             </tr>
             </thead>
             <tbody id="table-body">
             {% for product in products %}
-                <tr id="spinner-row" {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
+                <tr data-product-id="{{ product.id }}" id="spinner-row"
+                    {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ product.id }}"
+                                   id="productCheckbox{{ product.id }}">
+                            <label class="form-check-label" for="productCheckbox{{ product.id }}"></label>
+                        </div>
+                    </td>
                     <td class="start">{{ product.quantity }},00</td>
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
                     <td>{{ product.reference }}</td>
                     <td>{{ product.serialNumber }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
-{#                    <td class="end me-0 buttons">#}
-{#                        <button class="btn btn-outline-dark btn-sm me-2"#}
-{#                                onclick="copyToClipboard(this)">#}
-{#                            <i class="fa-regular fa-copy"></i>#}
-{#                        </button>#}
-{#                        <button class="btn btn-outline-dark btn-sm me-2">#}
-{#                            <a class="text-decoration-none" href="{{ path('edit_product', {'id': product.id}) }}">#}
-{#                                <i class="fa-regular fa-pen-to-square"></i>#}
-{#                            </a>#}
-{#                        </button>#}
-{#                        {{ include('product/_delete_form.html.twig') }}#}
-{#                    </td>#}
                 </tr>
             {% endfor %}
 
@@ -96,5 +90,37 @@
 
     {{ encore_entry_script_tags('spinner') }}
     {{ encore_entry_script_tags('filter') }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            selectAllCheckbox.addEventListener('click', function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                });
+
+                updateSelectAllButtonText();
+            })
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    updateSelectAllButtonText();
+                });
+            });
+
+            function updateSelectAllButtonText() {
+                const allChecked = Array.from(checkboxes).every(function (checkbox) {
+                    return checkbox.checked;
+                });
+
+                selectAllCheckbox.textContent = allChecked ? 'Tout désélectionner' : 'Tout sélectionner';
+            }
+
+            updateSelectAllButtonText();
+
+        })
+    </script>
 
 {% endblock %}

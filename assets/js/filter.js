@@ -1,5 +1,5 @@
 function compareQuantity(a, b) {
-    return parseInt(a, 10) - parseInt(b, 10);
+    return parseInt(a.replace(',', ''), 10) - parseInt(b.replace(',', ''), 10);
 }
 
 function compareName(a, b) {
@@ -20,15 +20,14 @@ function parseDate(dateString) {
     return new Date(year, month, day);
 }
 
-
 function sortTableData(columnIndex, compareFunction) {
     let table = document.getElementById('table-body');
     let rows = Array.from(table.getElementsByTagName('tr'));
     let sortOrder = table.getAttribute('data-sort-order');
 
-    rows.sort(function (a, b) {
-        let rowDataA = a.getElementsByTagName('td')[columnIndex].innerText;
-        let rowDataB = b.getElementsByTagName('td')[columnIndex].innerText;
+    rows.sort(function(a, b) {
+        let rowDataA = a.getElementsByTagName('td')[columnIndex].textContent.trim();
+        let rowDataB = b.getElementsByTagName('td')[columnIndex].textContent.trim();
 
         if (sortOrder === 'asc') {
             return compareFunction(rowDataA, rowDataB);
@@ -39,23 +38,23 @@ function sortTableData(columnIndex, compareFunction) {
 
     table.setAttribute('data-sort-order', sortOrder === 'asc' ? 'desc' : 'asc');
 
-    rows.forEach(function (row) {
+    rows.forEach(function(row) {
         table.appendChild(row);
     });
 }
 
-document.getElementById('quantity-header').addEventListener('click', function () {
-    sortTableData(0, compareQuantity);
+document.getElementById('quantity-header').addEventListener('click', function() {
+    sortTableData(1, compareQuantity);
 });
 
-document.getElementById('brand-header').addEventListener('click', function () {
-    sortTableData(1, compareName);
-});
-
-document.getElementById('name-header').addEventListener('click', function () {
+document.getElementById('brand-header').addEventListener('click', function() {
     sortTableData(2, compareName);
 });
 
-document.getElementById('added-at-header').addEventListener('click', function () {
-    sortTableData(5, compareAddedAt);
+document.getElementById('name-header').addEventListener('click', function() {
+    sortTableData(3, compareName);
+});
+
+document.getElementById('added-at-header').addEventListener('click', function() {
+    sortTableData(6, compareAddedAt);
 });
