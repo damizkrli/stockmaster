@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}STOCK{% endblock %}
+{% block title %}STOCKMASTER{% endblock %}
 
 {% block body %}
 
@@ -26,17 +26,6 @@
             </a>
         </div>
 
-        <div class="d-flex align-item-start justify-content-start">
-            <div class="form-check mb-3 me-5">
-                <input class="form-check-input" type="checkbox" id="showLessCheckbox">
-                <label class="form-check-label" for="showLessCheckbox">Produits dont la quantité est inférieure à 5</label>
-            </div>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="showMoreCheckbox">
-                <label class="form-check-label" for="showMoreCheckbox">Produits dont la quantité est supérieure à 5</label>
-            </div>
-        </div>
-
         <div id="loading-overlay" class="loading" style="display: none;">
             <div class="spinner d-flex align-items-center justify-content-center"></div>
             <h2 class="center">Chargement en cours...</h2>
@@ -45,12 +34,28 @@
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
-                <th class="start">Qté</th>
-                <th class="little-cells">Marque</th>
-                <th class="little-cells">Désignation</th>
-                <th class="little-cells">Référence</th>
-                <th class="little-cells">Numéro de série</th>
-                <th class="little-cells">Entrée en stock</th>
+                <th class="start little-cells" id="quantity-header">
+                    <i class="fas fa-sort"></i>
+                    Qté
+                </th>
+                <th class="little-cells" id="brand-header">
+                        <i class="fas fa-sort"></i>
+                    Marque
+                </th>
+                <th class="little-cells" id="name-header">
+                        <i class="fas fa-sort"></i>
+                    Désignation
+                </th>
+                <th class="little-cells" id="reference-header">
+                    Référence
+                </th>
+                <th class="little-cells" id="serial-number-header">
+                    Numéro de série
+                </th>
+                <th class="medium-cells" id="added-at-header">
+                        <i class="fas fa-sort"></i>
+                    Date
+                </th>
 {#                <th class="center" colspan="2">Actions</th>#}
             </tr>
             </thead>

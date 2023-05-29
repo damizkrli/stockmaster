@@ -97,3 +97,14 @@ a:hover {
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
+
+ .fas.fa-sort {
+     margin-left: 5px;
+     opacity: 0.5;
+     transition: opacity 0.2s ease-in-out;
+     cursor: pointer;
+ }
+
+.fas.fa-sort-up {
+    transform: rotate(180deg);
+}
