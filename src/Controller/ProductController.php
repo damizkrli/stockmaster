@@ -83,28 +83,4 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
     }
-
-    #[Route('/products/delete', name: 'delete_selected_products', methods: ['POST'])]
-    public function deleteSelectedProducts(Request $request, ProductRepository $productRepository): Response
-    {
-        $productIds = $request->request->get('product_ids');
-
-        // Vérifier si des produits ont été sélectionnés
-        if (!empty($productIds)) {
-            // Récupérer les produits à supprimer depuis la base de données
-            $products = $productRepository->findBy(['id' => $productIds]);
-
-            // Supprimer les produits un par un
-            foreach ($products as $product) {
-                $productRepository->remove($product, true);
-            }
-
-            // Ajouter un message flash de succès
-            $this->addFlash('success', 'Les produits sélectionnés ont été supprimés avec succès.');
-        }
-
-        // Rediriger l'utilisateur vers une page appropriée
-        return $this->redirectToRoute('product_list');
-    }
-
 }
