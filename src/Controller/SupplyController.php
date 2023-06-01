@@ -37,7 +37,7 @@ class SupplyController extends AbstractController
         $supplies = $this->paginator->paginate(
             $suppliesQuery,
             $request->query->getInt('page', 1),
-            8
+            12
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
