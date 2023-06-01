@@ -37,7 +37,7 @@ class OutOfStockController extends AbstractController
         $outOfStocks = $this->paginator->paginate(
             $outOfStockQuery,
             $request->query->getInt('page', 1),
-            8
+            12
         );
 
         if ($form->isSubmitted() && $form->isValid()) {

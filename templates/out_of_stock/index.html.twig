@@ -8,28 +8,9 @@
 
     {% include 'layout/_tabs.html.twig' %}
 
-    <div class="container">
+    <div class="p-4">
 
-        <div class="title">
-            <h2 class="start me-3">
-                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#addOutOfStockModal">
-                    📦 Ajout de hors-stock
-                </button>
-            </h2>
-        </div>
-
-        <div class="export">
-            <a href="{{ path('export_out_of_stock_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
-                <i class="fa-regular fa-file-pdf"></i>
-                Export PDF
-            </a>
-        </div>
-
-        <div class="form-check form-switch mb-3">
-            <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
-            <label class="form-check-label" for="hideZeroCheckbox">Masquer les produits non disponible</label>
-        </div>
+        {% include '/layout/taskbars/_out_of_stock_taskbar.html.twig' %}
 
         <div id="loading-overlay" class="loading" style="display: none;">
             <div class="spinner d-flex align-items-center justify-content-center"></div>
@@ -39,35 +20,49 @@
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
-                <th class="start">Qté</th>
-                <th class="little-cells">Marque</th>
-                <th class="little-cells">Désignation</th>
-                <th class="little-cells">Référence</th>
-                <th class="little-cells">Entrée en stock</th>
-                <td class="center" colspan="2">Actions</td>
+                <th>
+                    <div class="form-check d-flex align-items-center justify-content-start">
+                        <input class="form-check-input" type="checkbox" id="selectAllCheckbox">
+                        <label class="form-check-label" for="selectAllCheckbox"></label>
+                    </div>
+                </th>
+                <th class="start little-cells" id="quantity-header">
+                    <i class="fas fa-sort"></i>
+                    Qté
+                </th>
+                <th class="medium-cells" id="brand-header">
+                    <i class="fas fa-sort"></i>
+                    Marque
+                </th>
+                <th class="medium-cells" id="name-header">
+                    <i class="fas fa-sort"></i>
+                    Désignation
+                </th>
+                <th class="medium-cells" id="reference-header">
+                    Référence
+                </th>
+                <th class="medium-cells" id="added-at-header">
+                    <i class="fas fa-sort"></i>
+                    Date
+                </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body">
             {% for out_of_stock in out_of_stocks %}
-                <tr id="spinner-now"
+                <tr data-out-of-stock-id="{{ out_of_stock.id }}" id="spinner-now"
                         {% if out_of_stock.quantity == 0 %}class="zero-quantity"{% endif %}>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ out_of_stock.id }}"
+                                   id="out_of_stockCheckbox{{ out_of_stock.id }}">
+                            <label class="form-check-label" for="out_of_stockCheckbox{{ out_of_stock.id }}"></label>
+                        </div>
+                    </td>
                     <td class="start">{{ out_of_stock.quantity }},00</td>
                     <td>{{ out_of_stock.brand | title }}</td>
                     <td>{{ out_of_stock.name | title }}</td>
                     <td>{{ out_of_stock.reference }}</td>
                     <td>{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/y') }}</td>
-                    <td class="end me-0 buttons">
-                        <button class="btn btn-outline-dark btn-sm exclude-from-clipboard me-2"
-                                onclick="copyToClipboard(this)">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                        <button class="btn btn-outline-dark btn-sm exclude-from-clipboard me-2">
-                            <a class="text-decoration-none" href="{{ path('edit_out_of_stock', {'id': out_of_stock.id}) }}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>
-                        </button>
-                        {{ include('out_of_stock/_delete_form.html.twig') }}
-                    </td>
                 </tr>
             {% endfor %}
 
