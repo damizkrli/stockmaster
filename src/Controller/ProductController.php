@@ -38,7 +38,7 @@ class ProductController extends AbstractController
         $products = $this->paginator->paginate(
             $productsQuery,
             $request->query->getInt('page', 1),
-            10
+            12
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
