@@ -1,35 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FOURNITURES{% endblock %}
-
 {% block body %}
 
     {% include 'layout/_toast.html.twig' %}
 
     {% include 'layout/_tabs.html.twig' %}
 
-    <div class="container">
+    <div class="p-4">
 
-        <div class="title">
-            <h2 class="start me-3">
-                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#addModal">
-                    📦 Ajout de fournitures
-                </button>
-            </h2>
-        </div>
-
-        <div class="export">
-            <a href="{{ path('export_supply_pdf') }}" target="_blank" class="btn btn-outline-black btn-sm">
-                <i class="fa-regular fa-file-pdf"></i>
-                Export PDF
-            </a>
-        </div>
-
-        <div class="form-check form-switch mb-3">
-            <input class="form-check-input" type="checkbox" id="hideZeroCheckbox">
-            <label class="form-check-label" for="hideZeroCheckbox">Masquer les fournitures en rupture</label>
-        </div>
+        {% include '/layout/taskbars/_supply_taskbar.html.twig' %}
 
         <div id="loading-overlay" class="loading" style="display: none;">
             <div class="spinner d-flex align-items-center justify-content-center"></div>
@@ -39,35 +18,49 @@
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
-                <th class="start">Qté</th>
-                <th class="little-cells">Marque</th>
-                <th class="little-cells">Désignation</th>
-                <th class="little-cells">Référence</th>
-                <th class="little-cells">Entrée en stock</th>
-                <th class="center" colspan="2">Actions</th>
+                <th>
+                    <div class="form-check d-flex align-items-center justify-content-start">
+                        <input class="form-check-input" type="checkbox" id="selectAllCheckbox">
+                        <label class="form-check-label" for="selectAllCheckbox"></label>
+                    </div>
+                </th>
+                <th class="start medium-cells" id="quantity-header">
+                    <i class="fas fa-sort"></i>
+                    Qté
+                </th>
+                <th class="medium-cells" id="brand-header">
+                    <i class="fas fa-sort"></i>
+                    Marque
+                </th>
+                <th class="medium-cells" id="name-header">
+                    <i class="fas fa-sort"></i>
+                    Désignation
+                </th>
+                <th class="medium-cells" id="reference-header">
+                    Référence
+                </th>
+                <th class="medium-cells" id="added-at-header">
+                    <i class="fas fa-sort"></i>
+                    Date
+                </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body">
             {% for supply in supplies %}
-                <tr id="spinner-row"
-                        {% if supply.quantity == 0 %}class="zero-quantity"{% endif %}>
+                <tr data-supply-id={{ supply.id }} id="spinner-row"
+                    {% if supply.quantity == 0 %}class="zero-quantity"{% endif %}>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ supply.id }}"
+                                   id="productCheckbox{{ supply.id }}">
+                            <label class="form-check-label" for="productCheckbox{{ supply.id }}"></label>
+                        </div>
+                    </td>
                     <td class="start">{{ supply.quantity }},00</td>
                     <td>{{ supply.brand | title }}</td>
                     <td>{{ supply.name | title }}</td>
                     <td>{{ supply.reference }}</td>
                     <td>{{ supply.addedAt ? supply.addedAt|date('d/m/y') }}</td>
-                    <td class="end me-0 buttons">
-                        <button class="btn btn-outline-dark btn-sm me-2"
-                                onclick="copyToClipboard(this)">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                        <button class="btn btn-outline-dark btn-sm me-2">
-                            <a class="text-decoration-none" href="{{ path('edit_supply', {'id': supply.id}) }}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>
-                        </button>
-                        {{ include('supply/_delete_form.html.twig') }}
-                    </td>
                 </tr>
             {% endfor %}
 
@@ -83,5 +76,7 @@
     </div>
 
     {{ encore_entry_script_tags('spinner') }}
+    {{ encore_entry_script_tags('filter') }}
+    {{ encore_entry_script_tags('select') }}
 
 {% endblock %}

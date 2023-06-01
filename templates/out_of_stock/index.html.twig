@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}HORS-STOCK{% endblock %}
-
 {% block body %}
 
     {% include 'layout/_toast.html.twig' %}
@@ -78,5 +76,7 @@
     </div>
 
     {{ encore_entry_script_tags('spinner') }}
+    {{ encore_entry_script_tags('filter') }}
+    {{ encore_entry_script_tags('select') }}
 
 {% endblock %}
