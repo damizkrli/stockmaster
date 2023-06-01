@@ -91,10 +91,10 @@ class ProductController extends AbstractController
             }
 
             $this->addFlash('success', 'Les produits ont été supprimés avec succès.');
+
             return new JsonResponse(['success' => true]);
         }
 
         return new JsonResponse(['success' => false, 'message' => 'Erreur lors de la suppression des produits.']);
     }
-
 }
