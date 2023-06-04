@@ -3,49 +3,11 @@
             data-bs-target="#addModal">
         Ajout de stock
     </button>
-    <button class="btn btn-outline-danger btn-sm ms-2" id="deleteSelectedRows">Supprimer</button>
     <button class="btn btn-outline-dark btn-sm ms-2">
         <a href="{{ path('export_product_pdf') }}" target="_blank" style="text-decoration: none">
             Exporter en PDF
         </a>
     </button>
+    {#    <button class="btn btn-outline-success btn-sm ms-2" id="deleteSelectedRows">Modifier</button> #}
+    {#    <button class="btn btn-outline-danger btn-sm ms-2" id="deleteSelectedRows" disabled>Supprimer la sélection</button> #}
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Récupérer le bouton de suppression
-        let deleteButton = document.getElementById("deleteSelectedRows");
-
-        // Ajouter un gestionnaire d'événement au clic sur le bouton de suppression
-        deleteButton.addEventListener("click", function () {
-            // Récupérer toutes les cases à cocher sélectionnées
-            let selectedCheckboxes = document.querySelectorAll("input.form-check-input:checked");
-
-            // Créer un tableau pour stocker les identifiants des produits à supprimer
-            let productIds = [];
-
-            // Parcourir les cases à cocher sélectionnées et récupérer les identifiants des produits
-            selectedCheckboxes.forEach(function (checkbox) {
-                productIds.push(checkbox.value);
-            });
-
-            // Envoyer une requête AJAX au serveur pour supprimer les produits sélectionnés
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "{{ path('delete_product') }}", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Redirection vers la page des produits après suppression réussie
-                        window.location.href = "{{ path('product') }}";
-                    } else {
-                        // Afficher une erreur en cas de problème lors de la suppression
-                        console.error("Une erreur s'est produite lors de la suppression des produits.");
-                    }
-                }
-            };
-            xhr.send("_token={{ csrf_token('delete_product') }}&ids=" + productIds.join(","));
-        });
-    });
-</script>
-

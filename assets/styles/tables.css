@@ -13,18 +13,23 @@ tbody {
     background-color: var(--var-white);
 }
 
+/* style width: 5% */
+.xs-cells {
+    width: 2%;
+}
+
 /* style width: 20% */
-.little-cells {
-    width: 20%;
+.s-cells {
+    width: 4%;
 }
 
 /* style width: 25% */
-.medium-cells {
-    width: 25%;
+.m-cells {
+    width: 12%;
 }
 
 /* style width: 33% */
-.large-cells {
+.l-cells {
     width: 33%;
 }
 
