@@ -38,7 +38,7 @@ class ProductController extends AbstractController
         $products = $this->paginator->paginate(
             $productsQuery,
             $request->query->getInt('page', 1),
-            12
+            10
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -74,27 +74,13 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/delete', name: 'delete_product', methods: ['POST'])]
-    public function delete(Request $request, ProductRepository $productRepository): JsonResponse
+    #[Route('/{id}', name: 'delete_product', methods: ['POST'])]
+    public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
     {
-        $productIds = $request->request->get('ids', []);
-        $csrfToken = $request->request->get('_token');
-
-        // Vérifier si le jeton CSRF est valide
-        if ($this->isCsrfTokenValid('delete_product', $csrfToken)) {
-            foreach ($productIds as $productId) {
-                $product = $productRepository->find($productId);
-
-                if ($product) {
-                    $productRepository->remove($product, true);
-                }
-            }
-
-            $this->addFlash('success', 'Les produits ont été supprimés avec succès.');
-
-            return new JsonResponse(['success' => true]);
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $productRepository->remove($product, true);
         }
 
-        return new JsonResponse(['success' => false, 'message' => 'Erreur lors de la suppression des produits.']);
+        return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
     }
 }

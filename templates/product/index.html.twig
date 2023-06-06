@@ -30,13 +30,13 @@
                     <i class="fas fa-sort"></i>
                     Désignation
                 </th>
-                <th class="s-cells" id="reference-header">
+                <th class="s-cells center" id="reference-header">
                     Référence
                 </th>
-                <th class="s-cells" id="serial-number-header">
+                <th class="s-cells center" id="serial-number-header">
                     Numéro de série
                 </th>
-                <th class="s-cells" id="added-at-header">
+                <th class="s-cells center" id="added-at-header">
                     <i class="fas fa-sort"></i>
                     Date
                 </th>
@@ -50,9 +50,9 @@
                     <td class="center">{{ product.quantity }},00</td>
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
-                    <td>{{ product.reference }}</td>
-                    <td>{{ product.serialNumber }}</td>
-                    <td>{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
+                    <td class="center">{{ product.reference }}</td>
+                    <td class="center">{{ product.serialNumber }}</td>
+                    <td class="center">{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
                             <button class="btn btn-outline-info btn-sm me-2">Détails</button>
