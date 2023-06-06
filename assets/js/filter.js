@@ -1,5 +1,8 @@
 function compareQuantity(a, b) {
-    return parseInt(a.replace(',', ''), 10) - parseInt(b.replace(',', ''), 10);
+    const quantityA = parseFloat(a.replace(',', '.'));
+    const quantityB = parseFloat(b.replace(',', '.'));
+
+    return quantityA - quantityB;
 }
 
 function compareName(a, b) {
@@ -44,17 +47,17 @@ function sortTableData(columnIndex, compareFunction) {
 }
 
 document.getElementById('quantity-header').addEventListener('click', function() {
-    sortTableData(1, compareQuantity);
+    sortTableData(0, compareQuantity); // Utilisez l'index 0 pour la quantité
 });
 
 document.getElementById('brand-header').addEventListener('click', function() {
-    sortTableData(2, compareName);
+    sortTableData(1, compareName);
 });
 
 document.getElementById('name-header').addEventListener('click', function() {
-    sortTableData(3, compareName);
+    sortTableData(2, compareName);
 });
 
 document.getElementById('added-at-header').addEventListener('click', function() {
-    sortTableData(6, compareAddedAt);
+    sortTableData(5, compareAddedAt); // Utilisez l'index 5 pour la date d'ajout
 });
