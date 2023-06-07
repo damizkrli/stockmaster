@@ -30,10 +30,10 @@
                 <tr>
                     <td>{{ item.name | title }}</td>
                     <td>{{ item.reference }}</td>
-                    <td>{{ item.serialNumber }}</td>
+                    <td style="text-align: center">{{ item.serialNumber }}</td>
                     <td>{{ item.brand | title }}</td>
-                    <td>{{ item.quantity }} Unité(s)</td>
-                    <td>{{ item.addedAt | date('d/m/y') }}</td>
+                    <td style="text-align: center">{{ item.quantity }}</td>
+                    <td style="text-align: center">{{ item.addedAt | date('d/m/y') }}</td>
                     <!-- Ajoutez plus de colonnes selon vos besoins -->
                 </tr>
             {% endfor %}
