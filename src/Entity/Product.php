@@ -154,4 +154,16 @@ class Product
 
         return $this;
     }
+
+    /**
+     * Diminuer la quantité du produit de la quantité spécifiée.
+     */
+    public function decreaseQuantity(int $quantity): void
+    {
+        $this->quantity -= $quantity;
+
+        if ($this->quantity < 0) {
+            $this->quantity = 0;
+        }
+    }
 }
