@@ -62,14 +62,14 @@
                             <div class="champCible" style="display: none;">
                                 <form action="{{ path('delete_product', {'id': product.id}) }}" method="POST">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
-                                    <input type="number" name="quantity" min="1" required style="width: 40px;">
+                                    <input type="number" name="quantity" min="0 " required style="width: 40px;">
                                     <button class="btn btn-outline-danger btn-sm ms-2" type="submit">
-                                        <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                        <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
                             </div>
                             <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
-                                <i class="fa-solid fa-xmark" style="color: #000000;"></i>
+                                <i class="fa-solid fa-xmark"></i>
                             </button>
                         </div>
                     </td>

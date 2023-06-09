@@ -44,6 +44,15 @@ class ProductController extends AbstractController
             10
         );
 
+        // Vérifier si un numéro de série a été saisi
+        $hasSerialNumber = !empty($product->getSerialNumber());
+
+        // Désactiver le champ de quantité si un numéro de série est saisi
+        $quantityOptions = ['required' => true];
+        if ($hasSerialNumber) {
+            $quantityOptions['disabled'] = true;
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $newProduct = $form->getData();
             $this->productRepository->save($newProduct, true);
@@ -55,6 +64,7 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'form' => $form->createView(),
+            'quantityOptions' => $quantityOptions, // Passer les options du champ de quantité au template
         ]);
     }
 
@@ -86,20 +96,22 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'delete_product', methods: ['POST'])]
-    public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
+    public function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $quantity = $request->request->get('quantity');
-            if ($quantity && $quantity > 0) {
+            if ($quantity && $quantity >= 0) {
                 $removedQuantity = min($quantity, $product->getQuantity());
-                $product->decreaseQuantity($removedQuantity); // Supprime la quantité spécifiée d'unités du produit
+                $product->decreaseQuantity($removedQuantity);
                 $this->entityManager->flush();
 
-                if ($removedQuantity === $product->getQuantity()) {
+                if (0 === $product->getQuantity()) {
+                    $this->entityManager->remove($product);
+                    $this->entityManager->flush();
                     $this->addFlash('success', 'Votre produit a été supprimé.');
                 } else {
-                    if ($removedQuantity === 1) {
-                        $this->addFlash('success', $removedQuantity.' produit à été supprimé.');
+                    if (1 === $removedQuantity) {
+                        $this->addFlash('success', $removedQuantity.' produit a été supprimé.');
                     } else {
                         $this->addFlash('success', $removedQuantity.' produits ont été supprimés.');
                     }
