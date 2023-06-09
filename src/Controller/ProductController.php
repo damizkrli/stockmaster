@@ -99,9 +99,9 @@ class ProductController extends AbstractController
                     $this->addFlash('success', 'Votre produit a été supprimé.');
                 } else {
                     if ($removedQuantity === 1) {
-                        $this->addFlash('success', $removedQuantity.'produit à été supprimé.');
+                        $this->addFlash('success', $removedQuantity.' produit à été supprimé.');
                     } else {
-                        $this->addFlash('success', $removedQuantity.'produits ont été supprimés.');
+                        $this->addFlash('success', $removedQuantity.' produits ont été supprimés.');
                     }
                 }
             }
