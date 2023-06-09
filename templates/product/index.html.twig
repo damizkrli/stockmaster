@@ -33,9 +33,6 @@
                 <th class="s-cells center" id="reference-header">
                     Référence
                 </th>
-                <th class="s-cells center" id="serial-number-header">
-                    Numéro de série
-                </th>
                 <th class="s-cells center" id="added-at-header">
                     <i class="fas fa-sort"></i>
                     Date
@@ -51,7 +48,6 @@
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
                     <td class="center">{{ product.reference }}</td>
-                    <td class="center">{{ product.serialNumber }}</td>
                     <td class="center">{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
