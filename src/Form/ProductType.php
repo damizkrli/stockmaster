@@ -38,12 +38,6 @@ class ProductType extends AbstractType
                     'placeholder' => 'Référence',
                 ],
             ])
-            ->add('serial_number', TextType::class, [
-                'label' => false,
-                'attr' => [
-                    'placeholder' => 'Numéro de série',
-                ],
-            ])
         ;
     }
 

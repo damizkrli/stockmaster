@@ -44,15 +44,6 @@ class ProductController extends AbstractController
             10
         );
 
-        // Vérifier si un numéro de série a été saisi
-        $hasSerialNumber = !empty($product->getSerialNumber());
-
-        // Désactiver le champ de quantité si un numéro de série est saisi
-        $quantityOptions = ['required' => true];
-        if ($hasSerialNumber) {
-            $quantityOptions['disabled'] = true;
-        }
-
         if ($form->isSubmitted() && $form->isValid()) {
             $newProduct = $form->getData();
             $this->productRepository->save($newProduct, true);
@@ -64,7 +55,6 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'form' => $form->createView(),
-            'quantityOptions' => $quantityOptions, // Passer les options du champ de quantité au template
         ]);
     }
 

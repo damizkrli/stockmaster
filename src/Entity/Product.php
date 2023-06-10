@@ -46,16 +46,6 @@ class Product
     private ?string $reference = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Veuillez associer un numéro de série.')]
-    #[Assert\Length(
-        min: '3',
-        max: '75',
-        minMessage: 'Le numéro de série ne doit pas être inférieur à {{ limit }} caractères',
-        maxMessage: 'Le numéro de série ne doit pas être supérieur à {{ limit }} caractères',
-    )]
-    private ?string $serial_number = null;
-
-    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Un produit doit avoir une marque.')]
     #[Assert\Length(
         min: '3',
@@ -115,18 +105,6 @@ class Product
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
-
-        return $this;
-    }
-
-    public function getSerialNumber(): ?string
-    {
-        return $this->serial_number;
-    }
-
-    public function setSerialNumber(string $serial_number): self
-    {
-        $this->serial_number = $serial_number;
 
         return $this;
     }
