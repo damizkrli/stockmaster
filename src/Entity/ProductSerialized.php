@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ProdutSerializedRepository;
+use App\Repository\ProductSerializedRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProdutSerializedRepository::class)]
-class ProdutSerialized
+#[ORM\Entity(repositoryClass: ProductSerializedRepository::class)]
+class ProductSerialized
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +27,9 @@ class ProdutSerialized
 
     #[ORM\Column(length: 255)]
     private ?string $brand = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $addedAt = null;
 
     public function getId(): ?int
     {
@@ -89,6 +92,18 @@ class ProdutSerialized
     public function setBrand(string $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getAddedAt(): ?\DateTimeImmutable
+    {
+        return $this->addedAt;
+    }
+
+    public function setAddedAt(\DateTimeImmutable $addedAt): self
+    {
+        $this->addedAt = $addedAt;
 
         return $this;
     }

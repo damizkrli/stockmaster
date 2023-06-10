@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ProdutSerialized;
+use App\Entity\ProductSerialized;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProdutSerialized>
+ * @extends ServiceEntityRepository<ProductSerialized>
  *
- * @method ProdutSerialized|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProdutSerialized|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProdutSerialized[]    findAll()
- * @method ProdutSerialized[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProductSerialized|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProductSerialized|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProductSerialized[]    findAll()
+ * @method ProductSerialized[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProdutSerializedRepository extends ServiceEntityRepository
+class ProductSerializedRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProdutSerialized::class);
+        parent::__construct($registry, ProductSerialized::class);
     }
 
-    public function save(ProdutSerialized $entity, bool $flush = false): void
+    public function save(ProductSerialized $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProdutSerializedRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ProdutSerialized $entity, bool $flush = false): void
+    public function remove(ProductSerialized $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ProdutSerializedRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ProdutSerialized[] Returns an array of ProdutSerialized objects
+//     * @return ProductSerialized[] Returns an array of ProductSerialized objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ProdutSerializedRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ProdutSerialized
+//    public function findOneBySomeField($value): ?ProductSerialized
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
