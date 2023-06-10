@@ -19,7 +19,6 @@
             <tr>
                 <th>Désignation</th>
                 <th>Référence</th>
-                <th>Numéro de Série</th>
                 <th>Marque</th>
                 <th>Quantité</th>
                 <th>Date d'ajout</th>
@@ -30,7 +29,6 @@
                 <tr>
                     <td>{{ item.name | title }}</td>
                     <td>{{ item.reference }}</td>
-                    <td style="text-align: center">{{ item.serialNumber }}</td>
                     <td>{{ item.brand | title }}</td>
                     <td style="text-align: center">{{ item.quantity }}</td>
                     <td style="text-align: center">{{ item.addedAt | date('d/m/y') }}</td>

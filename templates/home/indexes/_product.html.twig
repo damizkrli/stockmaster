@@ -7,7 +7,6 @@
                 <th class="little-cells">Marque</th>
                 <th class="little-cells">Désignation</th>
                 <th class="little-cells">Référence</th>
-                <th class="little-cells">Numéro de série</th>
                 <th class="little-cells">Entrée en stock</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
                     <td>{{ product.brand|title }}</td>
                     <td>{{ product.name|title }}</td>
                     <td>{{ product.reference }}</td>
-                    <td>{{ product.serialNumber }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('Y-m-d') }}</td>
                 </tr>
             {% endif %}
