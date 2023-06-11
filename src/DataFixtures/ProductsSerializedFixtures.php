@@ -2,26 +2,27 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Product;
+use App\Entity\ProductSerialized;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class ProductsFixtures extends Fixture
+class ProductsSerializedFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 150; ++$i) {
-            $product = new Product();
-            $product->setName($faker->words(4, true))
+        for ($i = 0; $i < 100; ++$i) {
+            $productSerialized = new ProductSerialized();
+            $productSerialized->setName($faker->words(4, true))
                 ->setBrand($faker->words(1, true))
                 ->setReference($faker->bothify('???-###').'-'.$faker->bothify('???'))
-                ->setQuantity($faker->randomDigit())
+                ->setSerialNumber(mt_rand(100000000000, 999999999999))
+                ->setQuantity(1)
             ;
 
-            $manager->persist($product);
+            $manager->persist($productSerialized);
         }
 
         $manager->flush();
@@ -29,6 +30,6 @@ class ProductsFixtures extends Fixture
 
     public function getDependencies(): array
     {
-        return [ProductsFixtures::class];
+        return [ProductSerialized::class];
     }
 }

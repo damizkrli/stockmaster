@@ -14,7 +14,7 @@
         </thead>
         {% for product in products %}
             <tbody>
-            {% if product.quantity < 5 %}
+            {% if product.quantity <= 3 %}
                 <tr>
                     <td class="center">
                         <i class="fa-solid fa-circle-exclamation danger"></i>

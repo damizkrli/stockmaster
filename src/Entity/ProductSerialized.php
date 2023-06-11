@@ -31,6 +31,16 @@ class ProductSerialized
     #[ORM\Column]
     private ?\DateTimeImmutable $addedAt = null;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    public function __construct()
+    {
+        $this->addedAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
