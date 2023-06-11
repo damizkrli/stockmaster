@@ -1,7 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductSerializedController!{% endblock %}
+{% block title %}ProductSerialized index{% endblock %}
 
 {% block body %}
+    <h1>ProductSerialized index</h1>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>Serial_number</th>
+                <th>Quantity</th>
+                <th>Brand</th>
+                <th>AddedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for productSerialized in productsSerialized %}
+            <tr>
+                <td>{{ productSerialized.id }}</td>
+                <td>{{ productSerialized.name }}</td>
+                <td>{{ productSerialized.reference }}</td>
+                <td>{{ productSerialized.serialNumber }}</td>
+                <td>{{ productSerialized.quantity }}</td>
+                <td>{{ productSerialized.brand }}</td>
+                <td>{{ productSerialized.addedAt ? productSerialized.addedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_productSerialized_show', {'id': productSerialized.id}) }}">show</a>
+                    <a href="{{ path('app_productSerialized_edit', {'id': productSerialized.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_productSerialized_new') }}">Create new</a>
 {% endblock %}
