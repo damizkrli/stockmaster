@@ -1,45 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ProductSerialized index{% endblock %}
-
 {% block body %}
-    <h1>ProductSerialized index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Serial_number</th>
-                <th>Quantity</th>
-                <th>Brand</th>
-                <th>AddedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for productSerialized in productsSerialized %}
-            <tr>
-                <td>{{ productSerialized.id }}</td>
-                <td>{{ productSerialized.name }}</td>
-                <td>{{ productSerialized.reference }}</td>
-                <td>{{ productSerialized.serialNumber }}</td>
-                <td>{{ productSerialized.quantity }}</td>
-                <td>{{ productSerialized.brand }}</td>
-                <td>{{ productSerialized.addedAt ? productSerialized.addedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_productSerialized_show', {'id': productSerialized.id}) }}">show</a>
-                    <a href="{{ path('app_productSerialized_edit', {'id': productSerialized.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% include 'layout/_toast.html.twig' %}
 
-    <a href="{{ path('app_productSerialized_new') }}">Create new</a>
+    {% include 'layout/_tabs.html.twig' %}
+
+    <div class="p-4">
+
+        {% include '/layout/taskbars/_product_taskbar.html.twig' %}
+
+        <div id="loading-overlay" class="loading" style="display: none;">
+            <div class="spinner d-flex align-items-center justify-content-center"></div>
+            <h2 class="center">Chargement en cours...</h2>
+        </div>
+
+        <table class="table table-hover" style="display: none;">
+            <thead>
+            <tr>
+                <th class="xs-cells center" id="quantity-header">
+                    <i class="fas fa-sort"></i>
+                    Qté
+                </th>
+                <th class="s-cells" id="brand-header">
+                    <i class="fas fa-sort"></i>
+                    Marque
+                </th>
+                <th class="m-cells" id="name-header">
+                    <i class="fas fa-sort"></i>
+                    Désignation
+                </th>
+                <th class="s-cells center" id="reference-header">
+                    Référence
+                </th>
+                <th class="s-cells center" id="added-at-header">
+                    <i class="fas fa-sort"></i>
+                    Date
+                </th>
+                <th class="s-cells"></th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            {% for productSerialized in productsSerialized %}
+                <tr data-product-id="{{ productSerialized.id }}" id="spinner-row"
+                    {% if productSerialized.quantity > 5 %}class="zero-quantity"{% endif %}>
+                    <td class="center">{{ productSerialized.quantity }},00</td>
+                    <td>{{ productSerialized.brand | title }}</td>
+                    <td>{{ productSerialized.name | title }}</td>
+                    <td class="center">{{ productSerialized.reference }}</td>
+                    <td class="center">{{ productSerialized.addedAt ? productSerialized.addedAt|date('d/m/Y') }}</td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button id="detailButton" class="btn btn-outline-info btn-sm me-2">
+                                <a class="text-decoration-none" href="{{ path('productSerialized_show', {'id': productSerialized.id }) }}">Detail</a>
+                            </button>
+                            <button class="toggleButton btn btn-outline-dark btn-sm">Supprimer</button>
+                            <div class="champCible" style="display: none;">
+                                <form action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}" method="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ productSerialized.id) }}">
+                                    <input type="number" name="quantity" min="0 " required style="width: 40px;">
+                                    <button class="btn btn-outline-danger btn-sm ms-2" type="submit">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+
+
+            {% include 'layout/modal/_modal_add_product.html.twig' %}
+
+            </tbody>
+        </table>
+
+        <div class="pagination disable">
+            {{ knp_pagination_render(productsSerialized) }}
+        </div>
+
+    </div>
+
+    {{ encore_entry_script_tags('spinner') }}
+    {{ encore_entry_script_tags('filter') }}
+    {{ encore_entry_script_tags('select') }}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.toggleButton').click(function() {
+                var container = $(this).closest('tr');
+                var toggleButton = $(this);
+                var cancelButton = container.find('.cancelButton');
+                var champCible = container.find('.champCible');
+                var detailButton = container.find('.btn-outline-info'); // Modified line
+
+                champCible.show();
+                toggleButton.hide();
+                cancelButton.show();
+                detailButton.hide();
+            });
+
+            $('.cancelButton').click(function() {
+                var container = $(this).closest('tr');
+                var toggleButton = container.find('.toggleButton');
+                var cancelButton = $(this);
+                var champCible = container.find('.champCible');
+                var detailButton = container.find('.btn-outline-info'); // Modified line
+
+                champCible.hide();
+                cancelButton.hide();
+                toggleButton.show();
+                detailButton.show();
+            });
+        });
+    </script>
+
 {% endblock %}

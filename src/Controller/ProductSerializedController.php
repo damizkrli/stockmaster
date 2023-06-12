@@ -53,8 +53,9 @@ class ProductSerializedController extends AbstractController
         }
 
         return $this->render('product_serialized/index.html.twig', [
-            'productSerialized' => $productsSerialized,
+            'productsSerialized' => $productsSerialized,
             'form' => $form->createView(),
+
         ]);
     }
 
@@ -66,7 +67,7 @@ class ProductSerializedController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit_product', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit_productSerialized', methods: ['GET', 'POST'])]
     public function edit(Request $request, ProductSerialized $productSerialized, ProductSerializedRepository $productRepository): Response
     {
         $form = $this->createForm(ProductSerializedType::class, $productSerialized);
@@ -85,7 +86,7 @@ class ProductSerializedController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'delete_product', methods: ['POST'])]
+    #[Route('/product/{id}', name: 'delete_productSerialized', methods: ['POST'])]
     public function delete(Request $request, ProductSerialized $productSerialized, ProductSerializedRepository $productSerializedRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$productSerialized->getId(), $request->request->get('_token'))) {
