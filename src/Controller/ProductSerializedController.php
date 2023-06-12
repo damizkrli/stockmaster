@@ -55,7 +55,6 @@ class ProductSerializedController extends AbstractController
         return $this->render('product_serialized/index.html.twig', [
             'productsSerialized' => $productsSerialized,
             'form' => $form->createView(),
-
         ]);
     }
 
