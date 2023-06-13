@@ -39,6 +39,7 @@ class ProductSerialized
     public function __construct()
     {
         $this->addedAt = new \DateTimeImmutable();
+        $this->quantity = 1;
     }
 
     public function getId(): ?int
