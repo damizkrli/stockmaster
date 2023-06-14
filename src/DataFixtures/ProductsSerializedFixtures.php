@@ -19,7 +19,6 @@ class ProductsSerializedFixtures extends Fixture
                 ->setBrand($faker->words(1, true))
                 ->setReference($faker->bothify('???-###').'-'.$faker->bothify('???'))
                 ->setSerialNumber(mt_rand(100000000000, 999999999999))
-//                ->setQuantity(1)
             ;
 
             $manager->persist($productSerialized);
