@@ -51,10 +51,17 @@
                     <td class="center">{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
-                            <button id="detailButton" class="btn btn-outline-info btn-sm me-2">
-                                <a class="text-decoration-none" href="{{ path('product_show', {'id': product.id }) }}">Detail</a>
+                            <button id="detailButton" class="btn btn-sm me-2">
+                                <a class="text-decoration-none" style="color: black;"
+                                   href="{{ path('product_show', {'id': product.id }) }}">
+                                    <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
+                                    Détails
+                                </a>
                             </button>
-                            <button class="toggleButton btn btn-outline-dark btn-sm">Supprimer</button>
+                            <button class="toggleButton btn btn-sm">
+                                <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                Supprimer
+                            </button>
                             <div class="champCible" style="display: none;">
                                 <form action="{{ path('delete_product', {'id': product.id}) }}" method="POST">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
