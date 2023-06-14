@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\OutOfStock;
 use App\Entity\Product;
+use App\Entity\ProductSerialized;
 use App\Entity\Supply;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
@@ -26,6 +27,26 @@ class ExportController extends AbstractController
         $data = $this->entityManager->getRepository(Product::class)->findAll();
 
         $html = $this->renderView('export/product_pdf.html.twig', [
+            'data' => $data,
+        ]);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'Portrait');
+        $dompdf->render();
+
+        return new Response($dompdf->output(), Response::HTTP_OK, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="export.pdf"',
+        ]);
+    }
+
+    #[Route('/export-productserialized-pdf', name: 'export_product_pdf')]
+    public function exportProductSerializedToPdf(): Response
+    {
+        $data = $this->entityManager->getRepository(ProductSerialized::class)->findAll();
+
+        $html = $this->renderView('export/productserialized_pdf.html.twig', [
             'data' => $data,
         ]);
 
