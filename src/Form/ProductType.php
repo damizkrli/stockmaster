@@ -43,6 +43,7 @@ class ProductType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Description du produit',
+                    'rows' => '10',
                 ],
             ])
         ;
