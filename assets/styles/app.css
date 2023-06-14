@@ -23,7 +23,7 @@ body {
 }
 
 a {
-    color: var(--var-black);
+    color: var(--var-white);
 }
 
 a:hover {

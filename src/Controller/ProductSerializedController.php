@@ -85,13 +85,13 @@ class ProductSerializedController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'delete_productSerialized', methods: ['POST'])]
+    #[Route('/product/serialized/{id}', name: 'delete_productSerialized', methods: ['POST'])]
     public function delete(Request $request, ProductSerialized $productSerialized, ProductSerializedRepository $productSerializedRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$productSerialized->getId(), $request->request->get('_token'))) {
             $productSerializedRepository->remove($productSerialized, true);
         }
 
-        return $this->redirectToRoute('product_serialized', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('productSerialized', [], Response::HTTP_SEE_OTHER);
     }
 }
