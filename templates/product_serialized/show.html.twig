@@ -8,14 +8,23 @@
             <div class="col-md-4">
                 <!-- bbb_deals -->
                 <div class="bbb_deals">
-                    <div class="ribbon ribbon-top-right">
+                    <div class="ribbon ribbon-top-left">
                         <span {% if productsSerialized.quantity < 3 %}style="background-color: red" {% endif %}>
                             <small class="cross">x</small>{{ productsSerialized.quantity }}
                         </span>
                     </div>
+                    <div class="d-flex align-item-end justify-content-end">
+                        <span>
+                            <a class="btn btn-sm"
+                               href="{{ path('edit_productSerialized', {'id': productsSerialized.id }) }}">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                    </div>
                     <div class="bbb_deals_slider_container">
                         <div class=" bbb_deals_item">
-                            <div class="bbb_deals_image"><img src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt="">
+                            <div class="bbb_deals_image"><img
+                                        src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt="">
                             </div>
                             <div class="bbb_deals_content">
                                 <div class="bbb_deals_info_line d-flex align-item-start justify-content-start">
@@ -41,8 +50,6 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-center">
-        <button class="btn btn-dark btn-sm" style="color: white">
-            <a class="text-decoration-none" href="{{ path('productSerialized') }}">Retour</a>
-        </button>
+        <a class="btn btn-dark btn-sm text-decoration-none" href="{{ path('productSerialized') }}">Retour</a>
     </div>
 {% endblock %}

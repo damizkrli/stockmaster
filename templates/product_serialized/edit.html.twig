@@ -3,11 +3,20 @@
 {% block title %}Edit ProductSerialized{% endblock %}
 
 {% block body %}
-    <h1>Edit ProductSerialized</h1>
 
-    {{ include('product_serialized/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container">
+        <h1>{{ productsSerialized.name }}</h1>
 
-    <a href="{{ path('app_product_serialized_index') }}">back to list</a>
+            {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-dark btn-sm">{{ button_label|default('Enregistrer') }}</button>
+            {{ form_end(form) }}
+            <a class="btn btn-dark btn-sm" href="{{ path('productSerialized') }}">Retour</a>
 
-    {{ include('product_serialized/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    {#    {{ include('product_serialized/_delete_form.html.twig') }} #}
+
 {% endblock %}

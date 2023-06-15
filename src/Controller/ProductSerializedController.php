@@ -66,7 +66,7 @@ class ProductSerializedController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit_productSerialized', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'edit_productSerialized', methods: ['GET', 'POST'])]
     public function edit(Request $request, ProductSerialized $productSerialized, ProductSerializedRepository $productRepository): Response
     {
         $form = $this->createForm(ProductSerializedType::class, $productSerialized);
@@ -76,7 +76,7 @@ class ProductSerializedController extends AbstractController
             $productRepository->save($productSerialized, true);
             $this->addFlash('success', 'Votre produit a été modifié avec succès.');
 
-            return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('productSerialized', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('product_serialized/edit.html.twig', [

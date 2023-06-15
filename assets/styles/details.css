@@ -89,8 +89,8 @@ h5 {
 }
 
 .ribbon-top-right {
-    top: -10px;
-    right: -10px
+    top: 0;
+    right: 0
 }
 
 .ribbon-top-right::before, .ribbon-top-right::after {
@@ -208,7 +208,7 @@ div {
 @media only screen and (max-width: 991px) {
     .bbb_deals {
         width: 100%;
-        margin-right: 0px
+        margin-right: 0
     }
 }
 
