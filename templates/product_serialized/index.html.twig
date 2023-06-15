@@ -22,19 +22,19 @@
                     <i class="fas fa-sort"></i>
                     Qté
                 </th>
-                <th class="s-cells" id="brand-header">
-                    <i class="fas fa-sort"></i>
-                    Marque
-                </th>
                 <th class="m-cells" id="name-header">
                     <i class="fas fa-sort"></i>
                     Désignation
                 </th>
-                <th class="s-cells center" id="reference-header">
+                <th class="s-cells" id="reference-header">
                     Référence
                 </th>
-                <th class="s-cells center" id="reference-header">
+                <th class="s-cells" id="reference-header">
                     Numéro de série
+                </th>
+                <th class="s-cells" id="brand-header">
+                    <i class="fas fa-sort"></i>
+                    Marque
                 </th>
                 <th class="s-cells center" id="added-at-header">
                     <i class="fas fa-sort"></i>
@@ -47,11 +47,11 @@
             {% for productSerialized in productsSerialized %}
                 <tr data-product-id="{{ productSerialized.id }}" id="spinner-row"
                     {% if productSerialized.quantity > 5 %}class="zero-quantity"{% endif %}>
-                    <td class="center">{{ productSerialized.quantity }},00</td>
-                    <td>{{ productSerialized.brand | title }}</td>
+                        <td class="center">{{ productSerialized.quantity }},00</td>
                     <td>{{ productSerialized.name | title }}</td>
-                    <td class="center">{{ productSerialized.reference }}</td>
-                    <td class="center">{{ productSerialized.serialNumber }}</td>
+                    <td >{{ productSerialized.reference }}</td>
+                    <td >{{ productSerialized.serialNumber }}</td>
+                    <td>{{ productSerialized.brand }}</td>
                     <td class="center">{{ productSerialized.addedAt ? productSerialized.addedAt|date('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
