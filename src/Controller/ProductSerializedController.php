@@ -47,9 +47,9 @@ class ProductSerializedController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newProductSerialized = $form->getData();
             $this->productSerializedRepository->save($newProductSerialized, true);
-            $this->addFlash('success', 'Votre produit a été ajouté avec succès.');
+            $this->addFlash('success', 'Votre produit sérialisé a été ajouté avec succès.');
 
-            return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('productSerialized', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('product_serialized/index.html.twig', [
