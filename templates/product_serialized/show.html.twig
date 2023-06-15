@@ -15,13 +15,22 @@
                     </div>
                     <div class="bbb_deals_slider_container">
                         <div class=" bbb_deals_item">
-                            <div class="bbb_deals_image"><img src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt=""></div>
+                            <div class="bbb_deals_image"><img src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt="">
+                            </div>
                             <div class="bbb_deals_content">
+                                <div class="bbb_deals_info_line d-flex align-item-start justify-content-start">
+                                    <div class="tag">
+                                        {{ productsSerialized.brand | upper }}</div>
+                                </div>
                                 <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
                                     <div class="bbb_deals_item_name">{{ productsSerialized.name | title }}</div>
                                 </div>
                                 <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    <div class="bbb_deals_item_category">{{ productsSerialized.reference }}</div>
+                                    <div class="bbb_deals_item_category">Ref : {{ productsSerialized.reference }}</div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-start">
+                                    <div class="bbb_deals_item_category">SN
+                                        : {{ productsSerialized.serialNumber }}</div>
                                 </div>
                             </div>
                         </div>
