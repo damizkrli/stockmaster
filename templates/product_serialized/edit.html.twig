@@ -8,7 +8,14 @@
         <h1>{{ productsSerialized.name }}</h1>
 
             {{ form_start(form) }}
-        {{ form_widget(form) }}
+        Désignation :
+        {{ form_row(form.name) }}
+        Référence :
+        {{ form_row(form.reference) }}
+        Numéro de série :
+        {{ form_row(form.serial_number) }}
+        Marque :
+        {{ form_row(form.brand) }}
         <div class="d-grid gap-2 d-md-block">
         <button class="btn btn-dark btn-sm">{{ button_label|default('Enregistrer') }}</button>
             {{ form_end(form) }}
