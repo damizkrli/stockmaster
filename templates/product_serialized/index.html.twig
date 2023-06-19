@@ -18,9 +18,9 @@
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
-                <th class="xs-cells center" id="quantity-header">
+                <th class="s-cells" id="brand-header">
                     <i class="fas fa-sort"></i>
-                    Qté
+                    Marque
                 </th>
                 <th class="m-cells" id="name-header">
                     <i class="fas fa-sort"></i>
@@ -32,10 +32,6 @@
                 <th class="s-cells" id="reference-header">
                     Numéro de série
                 </th>
-                <th class="s-cells" id="brand-header">
-                    <i class="fas fa-sort"></i>
-                    Marque
-                </th>
                 <th class="s-cells center" id="added-at-header">
                     <i class="fas fa-sort"></i>
                     Date
@@ -43,37 +39,35 @@
                 <th class="s-cells"></th>
             </tr>
             </thead>
-            <tbody id="table-body">
+            <tr id="table-body">
             {% for productSerialized in productsSerialized %}
-                <tr data-product-id="{{ productSerialized.id }}" id="spinner-row"
-                    {% if productSerialized.quantity > 5 %}class="zero-quantity"{% endif %}>
-                        <td class="center">{{ productSerialized.quantity }},00</td>
-                    <td>{{ productSerialized.name | title }}</td>
-                    <td >{{ productSerialized.reference }}</td>
-                    <td >{{ productSerialized.serialNumber }}</td>
-                    <td>{{ productSerialized.brand }}</td>
-                    <td class="center">{{ productSerialized.addedAt ? productSerialized.addedAt|date('d/m/Y') }}</td>
-                    <td>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <button id="detailButton" class="btn btn-sm me-2">
-                                <a class="text-decoration-none" style="color: black;"
-                                   href="{{ path('productSerialized_show', {'id': productSerialized.id }) }}">
-                                    <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
-                                    Détails
-                                </a>
+            <tr data-product-id="{{ productSerialized.id }}" id="spinner-row">
+                <td>{{ productSerialized.brand | upper }}</td>
+                <td>{{ productSerialized.name | title }}</td>
+                <td>{{ productSerialized.reference }}</td>
+                <td>{{ productSerialized.serialNumber }}</td>
+                <td class="center">{{ productSerialized.addedAt ? productSerialized.addedAt|date('d/m/Y') }}</td>
+                <td>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button id="detailButton" class="btn btn-sm me-2">
+                            <a class="text-decoration-none" style="color: black;"
+                               href="{{ path('productSerialized_show', {'id': productSerialized.id }) }}">
+                                <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
+                                Détails
+                            </a>
+                        </button>
+                        <form method="post"
+                              action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}"
+                              onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token"
+                                   value="{{ csrf_token('delete' ~ productSerialized.id) }}">
+                            <button class="btn btn-sm">
+                                <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                Supprimer
                             </button>
-                            <form method="post"
-                                  action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}"
-                                  onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                <input type="hidden" name="_token"
-                                       value="{{ csrf_token('delete' ~ productSerialized.id) }}">
-                                <button class="btn btn-sm">
-                                    <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
-                                    Supprimer
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+                        </form>
+                    </div>
+                </td>
                 </tr>
             {% endfor %}
 

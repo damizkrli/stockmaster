@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container">
-        <h1>{{ productsSerialized.name }}</h1>
+        <h1>{{ productsSerialized.name | title }}</h1>
 
         {{ form_start(form) }}
         <i>Désignation :</i>
