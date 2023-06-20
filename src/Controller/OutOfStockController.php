@@ -54,6 +54,14 @@ class OutOfStockController extends AbstractController
         ]);
     }
 
+    #[Route('/{id', name: 'show_out_of_stock', methods: ['GET', 'POST'])]
+    public function show(OutOfStock $outOfStock): Response
+    {
+        return $this->render('out_of_stock/show.html.twig', [
+            'out_of_stock' => $outOfStock,
+        ]);
+    }
+
     #[Route('/{id}/edit', name: 'edit_out_of_stock', methods: ['GET', 'POST'])]
     public function edit(Request $request, OutOfStock $outOfStock, OutOfStockRepository $outOfStockRepository): Response
     {

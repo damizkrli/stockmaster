@@ -63,7 +63,7 @@ class ProductSerializedController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'productSerialized_show', methods: ['GET', 'POST'])]
+    #[Route('/{id}', name: 'show_productSerialized', methods: ['GET', 'POST'])]
     public function show(ProductSerialized $productSerialized): Response
     {
         return $this->render('product_serialized/show.html.twig', [
