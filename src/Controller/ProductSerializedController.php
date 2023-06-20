@@ -11,22 +11,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/serialized')]
 class ProductSerializedController extends AbstractController
 {
     private ProductSerializedRepository $productSerializedRepository;
-    private PaginatorInterface $paginator;
-    private EntityManagerInterface $entityManager;
+    private PaginatorInterface          $paginator;
+    private EntityManagerInterface      $entityManager;
+    private CsrfTokenManagerInterface   $csrfTokenManager;
 
     public function __construct(
         ProductSerializedRepository $productSerializedRepository,
         PaginatorInterface $paginator,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CsrfTokenManagerInterface $csrfTokenManager,
     ) {
         $this->entityManager = $entityManager;
         $this->productSerializedRepository = $productSerializedRepository;
         $this->paginator = $paginator;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     #[Route('/', name: 'productSerialized', methods: ['GET', 'POST'])]
@@ -91,6 +95,7 @@ class ProductSerializedController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$productSerialized->getId(), $request->request->get('_token'))) {
             $productSerializedRepository->remove($productSerialized, true);
+            $this->addFlash('success', 'Votre produit a été supprimé avec succès.');
         }
 
         return $this->redirectToRoute('productSerialized', [], Response::HTTP_SEE_OTHER);

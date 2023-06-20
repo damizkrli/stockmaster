@@ -6,14 +6,6 @@
 
     {% include 'layout/_tabs.html.twig' %}
 
-    {% if form_errors(form) %}
-        <div class="alert alert-danger">
-            {% for error in form_errors(form) %}
-                {{ error.message }}
-            {% endfor %}
-        </div>
-    {% endif %}
-
     <div class="p-4">
 
         {% include '/layout/taskbar/_taskbar.html.twig' %}
@@ -69,15 +61,16 @@
                                     Détails
                                 </a>
                             </button>
-                                <form method="post" action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ productSerialized.id) }}">
-                                    <button class="btn">
-                                        <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
-                                    </button>
-                                </form>
-                            <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+                            <form method="post"
+                                  action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}"
+                                  onsubmit="return confirm('Supprimer 1 {{ productSerialized.name | title }} ?');">
+                                <input type="hidden" name="_token"
+                                       value="{{ csrf_token('delete' ~ productSerialized.id) }}">
+                                <button class="btn">
+                                    <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                    Supprimer
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>
@@ -100,8 +93,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.toggleButton').click(function() {
+        $(document).ready(function () {
+            $('.toggleButton').click(function () {
                 var container = $(this).closest('tr');
                 var toggleButton = $(this);
                 var cancelButton = container.find('.cancelButton');
@@ -114,7 +107,7 @@
                 detailButton.hide();
             });
 
-            $('.cancelButton').click(function() {
+            $('.cancelButton').click(function () {
                 var container = $(this).closest('tr');
                 var toggleButton = container.find('.toggleButton');
                 var cancelButton = $(this);
@@ -127,6 +120,7 @@
                 detailButton.show();
             });
         });
+
     </script>
 
 {% endblock %}

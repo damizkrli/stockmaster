@@ -110,3 +110,13 @@ a:hover {
 .fas.fa-sort-up {
     transform: rotate(180deg);
 }
+
+.modal {
+    /* Ajoutez vos styles de modale ici */
+}
+
+.modal-content {
+    /* Ajoutez vos styles de contenu de modale ici */
+}
+
+/* Ajoutez d'autres styles de modale personnalisés si nécessaire */

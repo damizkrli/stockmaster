@@ -38,3 +38,7 @@ tbody {
     align-items: center;
     justify-content: space-evenly;
 }
+
+.table>:not(:first-child) {
+    border-top: 0;
+}
