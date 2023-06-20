@@ -6,6 +6,14 @@
 
     {% include 'layout/_tabs.html.twig' %}
 
+    {% if form_errors(form) %}
+        <div class="alert alert-danger">
+            {% for error in form_errors(form) %}
+                {{ error.message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="p-4">
 
         {% include '/layout/taskbar/_taskbar.html.twig' %}
@@ -18,6 +26,9 @@
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
+                <th class="xs-cells center" id="quantity-header">
+                    Qté
+                </th>
                 <th class="s-cells" id="brand-header">
                     <i class="fas fa-sort"></i>
                     Marque
@@ -26,10 +37,10 @@
                     <i class="fas fa-sort"></i>
                     Désignation
                 </th>
-                <th class="s-cells" id="reference-header">
+                <th class="s-cells center" id="reference-header">
                     Référence
                 </th>
-                <th class="s-cells" id="reference-header">
+                <th class="s-cells center">
                     Numéro de série
                 </th>
                 <th class="s-cells center" id="added-at-header">
@@ -39,38 +50,38 @@
                 <th class="s-cells"></th>
             </tr>
             </thead>
-            <tr id="table-body">
+            <tbody id="table-body">
             {% for productSerialized in productsSerialized %}
-            <tr data-product-id="{{ productSerialized.id }}" id="spinner-row">
-                <td>{{ productSerialized.brand | upper }}</td>
-                <td>{{ productSerialized.name | title }}</td>
-                <td>{{ productSerialized.reference }}</td>
-                <td>{{ productSerialized.serialNumber }}</td>
-                <td class="center">{{ productSerialized.addedAt ? productSerialized.addedAt|date('d/m/Y') }}</td>
-                <td>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button id="detailButton" class="btn btn-sm me-2">
-                            <a class="text-decoration-none" style="color: black;"
-                               href="{{ path('productSerialized_show', {'id': productSerialized.id }) }}">
-                                <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
-                                Détails
-                            </a>
-                        </button>
-                        <form method="post"
-                              action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}"
-                              onsubmit="return confirm('Are you sure you want to delete this item?');">
-                            <input type="hidden" name="_token"
-                                   value="{{ csrf_token('delete' ~ productSerialized.id) }}">
-                            <button class="btn btn-sm">
-                                <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
-                                Supprimer
+                <tr data-productSerialized-id="{{ productSerialized.id }}" id="spinner-row"
+                    {% if productSerialized.quantity > 5 %}class="zero-quantity"{% endif %}>
+                    <td class="center">{{ productSerialized.quantity }},00</td>
+                    <td>{{ productSerialized.brand | title }}</td>
+                    <td>{{ productSerialized.name | title }}</td>
+                    <td class="center">{{ productSerialized.reference }}</td>
+                    <td class="center">{{ productSerialized.serialNumber }}</td>
+                    <td class="center">{{ productSerialized.addedAt ? productSerialized.addedAt|date('d/m/Y') }}</td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button id="detailButton" class="btn btn-sm me-2">
+                                <a class="text-decoration-none" style="color: black;"
+                                   href="{{ path('productSerialized_show', {'id': productSerialized.id }) }}">
+                                    <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
+                                    Détails
+                                </a>
                             </button>
-                        </form>
-                    </div>
-                </td>
+                                <form method="post" action="{{ path('delete_productSerialized', {'id': productSerialized.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ productSerialized.id) }}">
+                                    <button class="btn">
+                                        <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                    </button>
+                                </form>
+                            <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
-
 
             {% include 'layout/modal/_modal_add_product_serialized.html.twig' %}
 
@@ -89,8 +100,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.toggleButton').click(function () {
+        $(document).ready(function() {
+            $('.toggleButton').click(function() {
                 var container = $(this).closest('tr');
                 var toggleButton = $(this);
                 var cancelButton = container.find('.cancelButton');
@@ -103,7 +114,7 @@
                 detailButton.hide();
             });
 
-            $('.cancelButton').click(function () {
+            $('.cancelButton').click(function() {
                 var container = $(this).closest('tr');
                 var toggleButton = container.find('.toggleButton');
                 var cancelButton = $(this);

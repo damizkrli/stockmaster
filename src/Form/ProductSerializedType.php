@@ -18,24 +18,28 @@ class ProductSerializedType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Marque',
                 ],
+                'required' => false
             ])
             ->add('name', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Désignation',
                 ],
+                'required' => false
             ])
             ->add('reference', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Référence',
                 ],
+                'required' => false
             ])
             ->add('serial_number', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Numéro de série',
                 ],
+                'required' => false
             ])
         ;
     }

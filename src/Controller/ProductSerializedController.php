@@ -46,6 +46,7 @@ class ProductSerializedController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newProductSerialized = $form->getData();
+
             $this->productSerializedRepository->save($newProductSerialized, true);
             $this->addFlash('success', 'Votre produit sérialisé a été ajouté avec succès.');
 

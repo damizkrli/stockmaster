@@ -47,7 +47,7 @@ function sortTableData(columnIndex, compareFunction) {
 }
 
 document.getElementById('quantity-header').addEventListener('click', function() {
-    sortTableData(0, compareQuantity); // Utilisez l'index 0 pour la quantité
+    sortTableData(0, compareQuantity);
 });
 
 document.getElementById('brand-header').addEventListener('click', function() {
@@ -59,5 +59,5 @@ document.getElementById('name-header').addEventListener('click', function() {
 });
 
 document.getElementById('added-at-header').addEventListener('click', function() {
-    sortTableData(5, compareAddedAt); // Utilisez l'index 5 pour la date d'ajout
+    sortTableData(5, compareAddedAt);
 });

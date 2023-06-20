@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\ProductSerializedRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProductSerializedRepository::class)]
+#[UniqueEntity('serial_number', message: 'Ce numéro de série existe déjà.')]
 class ProductSerialized
 {
     #[ORM\Id]
@@ -19,11 +21,11 @@ class ProductSerialized
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private ?string $serial_number = null;
 
     #[ORM\Column]
-    private ?int $quantity = null;
+    private ?int $quantity = 1;
 
     #[ORM\Column(length: 255)]
     private ?string $brand = null;
