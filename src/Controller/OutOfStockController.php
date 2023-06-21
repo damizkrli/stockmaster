@@ -37,7 +37,7 @@ class OutOfStockController extends AbstractController
         $outOfStocks = $this->paginator->paginate(
             $outOfStockQuery,
             $request->query->getInt('page', 1),
-            12
+            10
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,7 +54,7 @@ class OutOfStockController extends AbstractController
         ]);
     }
 
-    #[Route('/{id', name: 'show_out_of_stock', methods: ['GET', 'POST'])]
+    #[Route('/{id}', name: 'show_out_of_stock', methods: ['GET', 'POST'])]
     public function show(OutOfStock $outOfStock): Response
     {
         return $this->render('out_of_stock/show.html.twig', [
