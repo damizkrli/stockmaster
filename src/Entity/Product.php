@@ -10,10 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[UniqueEntity(
-    fields: ['serial_number'],
-    message : 'Ce Produit existe déjà en base de données.'
-)]
 class Product
 {
     #[ORM\Id]
