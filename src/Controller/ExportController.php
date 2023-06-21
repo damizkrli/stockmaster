@@ -41,7 +41,7 @@ class ExportController extends AbstractController
         ]);
     }
 
-    #[Route('/export-productserialized-pdf', name: 'export_product_pdf')]
+    #[Route('/export-productserialized-pdf', name: 'export_product_serialized_pdf')]
     public function exportProductSerializedToPdf(): Response
     {
         $data = $this->entityManager->getRepository(ProductSerialized::class)->findAll();
