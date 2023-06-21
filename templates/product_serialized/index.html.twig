@@ -8,7 +8,7 @@
 
     <div class="p-4">
 
-        {% include '/layout/taskbar/_taskbar.html.twig' %}
+        {% include '/layout/taskbar/_product_taskbar.html.twig' %}
 
         <div id="loading-overlay" class="loading" style="display: none;">
             <div class="spinner d-flex align-items-center justify-content-center"></div>
@@ -56,7 +56,7 @@
                         <div class="d-flex align-items-center justify-content-center">
                             <button id="detailButton" class="btn btn-sm me-2">
                                 <a class="text-decoration-none" style="color: black;"
-                                   href="{{ path('productSerialized_show', {'id': productSerialized.id }) }}">
+                                   href="{{ path('show_productSerialized', {'id': productSerialized.id }) }}">
                                     <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
                                     Détails
                                 </a>
