@@ -8,7 +8,7 @@
 
     <div class="p-4">
 
-        {% include '/layout/taskbar/_taskbar.html.twig' %}
+        {% include '/layout/taskbar/_out_of_stock_taskbar.html.twig' %}
 
         <div id="loading-overlay" class="loading" style="display: none;">
             <div class="spinner d-flex align-items-center justify-content-center"></div>
@@ -18,49 +18,58 @@
         <table class="table table-hover" style="display: none;">
             <thead>
             <tr>
-                <th>
-                    <div class="form-check d-flex align-items-center justify-content-start">
-                        <input class="form-check-input" type="checkbox" id="selectAllCheckbox">
-                        <label class="form-check-label" for="selectAllCheckbox"></label>
-                    </div>
-                </th>
-                <th class="start little-cells" id="quantity-header">
+                <th class="xs-cells center" id="quantity-header">
                     <i class="fas fa-sort"></i>
                     Qté
                 </th>
-                <th class="medium-cells" id="brand-header">
+                <th class="s-cells" id="brand-header">
                     <i class="fas fa-sort"></i>
                     Marque
                 </th>
-                <th class="medium-cells" id="name-header">
+                <th class="m-cells" id="name-header">
                     <i class="fas fa-sort"></i>
                     Désignation
                 </th>
-                <th class="medium-cells" id="reference-header">
+                <th class="s-cells" id="reference-header">
                     Référence
                 </th>
-                <th class="medium-cells" id="added-at-header">
+                <th class="s-cells" id="added-at-header">
                     <i class="fas fa-sort"></i>
                     Date
                 </th>
+                <th class="s-cells"></th>
             </tr>
             </thead>
             <tbody id="table-body">
             {% for out_of_stock in out_of_stocks %}
                 <tr data-out-of-stock-id="{{ out_of_stock.id }}" id="spinner-now"
-                        {% if out_of_stock.quantity == 0 %}class="zero-quantity"{% endif %}>
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{ out_of_stock.id }}"
-                                   id="out_of_stockCheckbox{{ out_of_stock.id }}">
-                            <label class="form-check-label" for="out_of_stockCheckbox{{ out_of_stock.id }}"></label>
-                        </div>
-                    </td>
+                    {% if out_of_stock.quantity == 0 %}class="zero-quantity"{% endif %}>
                     <td class="start">{{ out_of_stock.quantity }},00</td>
                     <td>{{ out_of_stock.brand | title }}</td>
                     <td>{{ out_of_stock.name | title }}</td>
-                    <td>{{ out_of_stock.reference }}</td>
-                    <td>{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/y') }}</td>
+                    <td class="center">{{ out_of_stock.reference }}</td>
+                    <td class="center">{{ out_of_stock.addedAt ? out_of_stock.addedAt|date('d/m/y') }}</td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button id="detailButton" class="btn btn-sm me-2">
+                                <a class="text-decoration-none" style="color: black;"
+                                   href="{{ path('show_out_of_stock', {'id': out_of_stock.id }) }}">
+                                    <i class="fa-solid fa-circle-info" style="color: #b3cfff;"></i>
+                                    Détails
+                                </a>
+                            </button>
+                            <form method="post"
+                                  action="{{ path('delete_out_of_stock', {'id': out_of_stock.id}) }}"
+                                  onsubmit="return confirm('Supprimer 1 {{ out_of_stock.name | title }} ?');">
+                                <input type="hidden" name="_token"
+                                       value="{{ csrf_token('delete' ~ out_of_stock.id) }}">
+                                <button class="btn">
+                                    <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                    Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
 
