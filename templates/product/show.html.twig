@@ -2,41 +2,19 @@
 
 {% block body %}
 
-    <div class="container mydiv">
-        <div class="row d-flex align-item-center justify-content-center">
-            <div class="col-md-4">
-                <!-- bbb_deals -->
-                <div class="bbb_deals">
-                    <div class="ribbon ribbon-top-left">
-                        <span {% if products.quantity < 3 %}style="background-color: red" {% endif %}>
-                            <small class="cross">x</small>{{ products.quantity }}
-                        </span></div>
-                    <div class="bbb_deals_slider_container">
-                        <div class=" bbb_deals_item">
-                            <div class="bbb_deals_image"><img src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt=""></div>
-                            <div class="bbb_deals_content">
-                                <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    <div class="bbb_deals_item_name">{{ products.name | title }}</div>
-                                </div>
-                                <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    <div class="bbb_deals_item_category">{{ products.reference }}</div>
-                                </div>
-                                <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    Description : <br>
-                                    {{ products.description }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="d-flex align-items-center justify-content-center p-4">
+    <div class="card" style="width: 18rem;">
+    <img src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt="{{ products.name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ products.name | title }}</h5>
+            <small>{{ products.reference }}</small>
+            <p class="card-text">{{ products.description }}</p>
         </div>
     </div>
+</div>
 
     <div class="d-flex align-items-center justify-content-center">
-        <button class="btn btn-dark btn-sm" style="color: white">
-            <a class="text-decoration-none" href="{{ path('product') }}">Retour</a>
-        </button>
+        <a class="text-decoration-none btn btn-dark btn-sm" href="{{ path('product') }}">Retour</a>
     </div>
 
 {% endblock %}
