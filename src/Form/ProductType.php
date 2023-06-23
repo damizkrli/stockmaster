@@ -33,6 +33,13 @@ class ProductType extends AbstractType
                     'placeholder' => 'Désignation',
                 ],
             ])
+            ->add('serial_number', TextType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Numéro de série',
+                ],
+            ])
             ->add('reference', TextType::class, [
                 'label' => false,
                 'attr' => [
@@ -43,7 +50,7 @@ class ProductType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Description du produit',
-                    'rows' => '10',
+                    'rows' => '5',
                 ],
             ])
         ;

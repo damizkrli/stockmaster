@@ -18,10 +18,12 @@ class ProductsFixtures extends Fixture
             $product->setName($faker->words(4, true))
                 ->setBrand($faker->words(1, true))
                 ->setReference($faker->bothify('???-###').'-'.$faker->bothify('???'))
-                ->setQuantity($faker->randomDigit())
-                ->setDescription($faker->paragraph)
-                ->setSerialNumber(mt_rand(100000000000, 999999999999))
-            ;
+                ->setQuantity($faker->randomDigitNotZero())
+                ->setDescription($faker->paragraph);
+
+            if (1 === $product->getQuantity()) {
+                $product->setSerialNumber(mt_rand(100000000000, 999999999999));
+            }
 
             $manager->persist($product);
         }

@@ -17,7 +17,7 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\PositiveOrZero(message: 'La quantité doit être de 0 ou plus.')]
+    #[Assert\GreaterThan(0, message: 'Vous devez ajouter au moins un produit.')]
     #[Assert\NotBlank(message: 'Cette valeur ne peut être vide.')]
     private ?int $quantity = null;
 
