@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Repository\OutOfStockRepository;
 use App\Repository\ProductRepository;
-use App\Repository\ProductSerializedRepository;
 use App\Repository\SupplyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

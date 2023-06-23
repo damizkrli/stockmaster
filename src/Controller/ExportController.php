@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\OutOfStock;
 use App\Entity\Product;
-use App\Entity\ProductSerialized;
 use App\Entity\Supply;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
