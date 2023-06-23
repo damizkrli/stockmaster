@@ -1,4 +1,5 @@
 @import "_vars.css";
+@import "cards.css";
 @import "countdown.css";
 @import "details.css";
 @import "navbar.css";
@@ -100,74 +101,5 @@ a:hover {
     }
 }
 
-.card {
-    display: flex;
-    align-items: center;
-    width: 75vw;
-    max-width: 650px;
-    padding: 50px 30px 50px 20px;
-    background: #fff;
-    border-radius: 24px;
-}
 
-.card img {
-    max-width: 280px;
-    width: 32vw;
-    height: 270px;
-    object-fit: cover;
-    border-radius: inherit;
-}
-
-h2, h3 {
-    font-weight: 400;
-}
-
-h3, label {
-    opacity: .5;
-}
-
-.card h2 {
-    font-size: 16px;
-    margin: 0;
-}
-
-.card h2 {
-    font-size: 16px;
-    margin: 0 0 20px;
-}
-
-.card .buttons {
-    display: inline-flex;
-    gap: 10px;
-}
-
-.card .stats var {
-    display: block;
-    font-size: 26px;
-}
-
-@media (width <= 720px) {
-    .card {
-        margin: 0 40px;
-        padding-left: 50px;
-        padding-right: 50px;
-        width: 100%;
-        text-align: center;
-        flex-direction: column;
-    }
-
-    .card h2 {
-        font-size: 30px;
-    }
-
-    .card img {
-        margin: -100px 0 30px 0;
-        width: 100%;
-        max-width: 1000px;
-    }
-
-    .card .stats var {
-        min-width: 90px;
-    }
-}
 
