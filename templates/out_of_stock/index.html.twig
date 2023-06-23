@@ -58,16 +58,23 @@
                                     Détails
                                 </a>
                             </button>
-                            <form method="post"
-                                  action="{{ path('delete_out_of_stock', {'id': out_of_stock.id}) }}"
-                                  onsubmit="return confirm('Supprimer 1 {{ out_of_stock.name | title }} ?');">
-                                <input type="hidden" name="_token"
-                                       value="{{ csrf_token('delete' ~ out_of_stock.id) }}">
-                                <button class="btn">
-                                    <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
-                                    Supprimer
-                                </button>
-                            </form>
+                            <button class="toggleButton btn btn-sm">
+                                <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                Supprimer
+                            </button>
+                            <div class="champCible" style="display: none;">
+                                <form action="{{ path('delete_out_of_stock', {'id': out_of_stock.id}) }}" method="POST">
+                                    <input type="hidden" name="_token"
+                                           value="{{ csrf_token('delete' ~ out_of_stock.id) }}">
+                                    <input type="number" name="quantity" min="0 " required style="width: 40px;">
+                                    <button class="btn btn-outline-danger btn-sm ms-2" type="submit">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -87,5 +94,36 @@
     {{ encore_entry_script_tags('spinner') }}
     {{ encore_entry_script_tags('filter') }}
     {{ encore_entry_script_tags('select') }}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.toggleButton').click(function () {
+                var container = $(this).closest('tr');
+                var toggleButton = $(this);
+                var cancelButton = container.find('.cancelButton');
+                var champCible = container.find('.champCible');
+                var detailButton = container.find('.btn-outline-info'); // Modified line
+
+                champCible.show();
+                toggleButton.hide();
+                cancelButton.show();
+                detailButton.hide();
+            });
+
+            $('.cancelButton').click(function () {
+                var container = $(this).closest('tr');
+                var toggleButton = container.find('.toggleButton');
+                var cancelButton = $(this);
+                var champCible = container.find('.champCible');
+                var detailButton = container.find('.btn-outline-info'); // Modified line
+
+                champCible.hide();
+                cancelButton.hide();
+                toggleButton.show();
+                detailButton.show();
+            });
+        });
+    </script>
 
 {% endblock %}
