@@ -30,6 +30,9 @@
                     <i class="fas fa-sort"></i>
                     Désignation
                 </th>
+                <th class="s-cells" id="name-header">
+                    Numero de série
+                </th>
                 <th class="s-cells center" id="reference-header">
                     Référence
                 </th>
@@ -47,6 +50,11 @@
                     <td class="center">{{ product.quantity }},00</td>
                     <td>{{ product.brand | title }}</td>
                     <td>{{ product.name | title }}</td>
+                    {% if product.serialNumber %}
+                        <td>{{ product.serialNumber }}</td>
+                    {% else %}
+                        <td>--</td>
+                    {% endif %}
                     <td class="center">{{ product.reference }}</td>
                     <td class="center">{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td>
@@ -97,8 +105,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.toggleButton').click(function() {
+        $(document).ready(function () {
+            $('.toggleButton').click(function () {
                 var container = $(this).closest('tr');
                 var toggleButton = $(this);
                 var cancelButton = container.find('.cancelButton');
@@ -111,7 +119,7 @@
                 detailButton.hide();
             });
 
-            $('.cancelButton').click(function() {
+            $('.cancelButton').click(function () {
                 var container = $(this).closest('tr');
                 var toggleButton = container.find('.toggleButton');
                 var cancelButton = $(this);

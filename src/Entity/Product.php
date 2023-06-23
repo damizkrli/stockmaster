@@ -57,6 +57,9 @@ class Product
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $serial_number = null;
+
     public function __toString(): string
     {
         return $this->name;
@@ -152,6 +155,18 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSerialNumber(): ?string
+    {
+        return $this->serial_number;
+    }
+
+    public function setSerialNumber(?string $serial_number): self
+    {
+        $this->serial_number = $serial_number;
 
         return $this;
     }

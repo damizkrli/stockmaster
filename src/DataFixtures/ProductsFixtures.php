@@ -20,6 +20,7 @@ class ProductsFixtures extends Fixture
                 ->setReference($faker->bothify('???-###').'-'.$faker->bothify('???'))
                 ->setQuantity($faker->randomDigit())
                 ->setDescription($faker->paragraph)
+                ->setSerialNumber(mt_rand(100000000000, 999999999999))
             ;
 
             $manager->persist($product);
