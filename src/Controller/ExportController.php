@@ -41,26 +41,6 @@ class ExportController extends AbstractController
         ]);
     }
 
-    #[Route('/export-productserialized-pdf', name: 'export_product_serialized_pdf')]
-    public function exportProductSerializedToPdf(): Response
-    {
-        $data = $this->entityManager->getRepository(ProductSerialized::class)->findAll();
-
-        $html = $this->renderView('export/productserialized_pdf.html.twig', [
-            'data' => $data,
-        ]);
-
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'Portrait');
-        $dompdf->render();
-
-        return new Response($dompdf->output(), Response::HTTP_OK, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="export.pdf"',
-        ]);
-    }
-
     #[Route('/export-out-of-stock-pdf', name: 'export_out_of_stock_pdf')]
     public function exportOutOfStockToPdf(): Response
     {
