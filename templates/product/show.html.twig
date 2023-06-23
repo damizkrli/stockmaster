@@ -2,19 +2,31 @@
 
 {% block body %}
 
-<div class="d-flex align-items-center justify-content-center p-4">
-    <div class="card" style="width: 18rem;">
-    <img src="https://media.extron.com/public/product/img/prodcat/prodtype09.png" alt="{{ products.name }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ products.name | title }}</h5>
-            <small>{{ products.reference }}</small>
-            <p class="card-text">{{ products.description }}</p>
+    <div class="container d-flex align-items-center justify-content-center mb-4">
+        <div class="card">
+            <img class="d-flex align-items-center justify-content-center"
+                 src="https://media.extron.com/public/product/img/prodcat/prodtype09.png"/>
+            <div>
+                <h2>{{ products.reference }}</h2>
+                <h3>{{ products.name }}</h3>
+              <div class="d-flex align-items-center justify-content-end">
+                  <ul class="stats">
+                      <li style="list-style-type: none">
+                          <var>{{ products.quantity }}</var>
+                          {% if products.quantity > 1 %}
+                              <label>Disponibles</label>
+                          {% else %}
+                              <label>Disponible</label>
+                          {% endif %}
+                      </li>
+                  </ul>
+              </div>
+                <nav class="buttons d-flex align-items-center justify-content-center">
+                        <a class="btn btn-primary btn-sm" href="{{ path('edit_product', {'id' : products.id }) }}">Modifier le produit</a>
+                    <a class="btn btn-dark btn-sm" href="{{ path('product') }}">Retour</a>
+                </nav>
+            </div>
         </div>
-    </div>
-</div>
-
-    <div class="d-flex align-items-center justify-content-center">
-        <a class="text-decoration-none btn btn-dark btn-sm" href="{{ path('product') }}">Retour</a>
     </div>
 
 {% endblock %}
