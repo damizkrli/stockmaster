@@ -46,8 +46,12 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newProduct = $form->getData();
-            $this->productRepository->save($newProduct, true);
-            $this->addFlash('success', 'Votre produit a été ajouté avec succès.');
+            try {
+                $this->productRepository->save($newProduct, true);
+                $this->addFlash('success', 'Votre produit a été ajouté avec succès.');
+            } catch (\Exception $e) {
+                $this->addFlash('danger', 'Des erreurs ont été détectées. Vérifier vos informations.');
+            }
 
             return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
         }
