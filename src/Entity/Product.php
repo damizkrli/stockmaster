@@ -170,5 +170,4 @@ class Product
             $this->quantity = 0;
         }
     }
-
 }
