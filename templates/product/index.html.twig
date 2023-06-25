@@ -31,7 +31,7 @@
                     Désignation
                 </th>
                 <th class="s-cells" id="name-header">
-                    Numero de série
+                    Numéro de série
                 </th>
                 <th class="s-cells center" id="reference-header">
                     Référence
@@ -66,23 +66,33 @@
                                     Détails
                                 </a>
                             </button>
-                            <button class="toggleButton btn btn-sm">
-                                <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
-                                Supprimer
-                            </button>
-                            <div class="champCible" style="display: none;">
-                                <form action="{{ path('delete_product', {'id': product.id}) }}" method="POST">
-                                    <input type="hidden" name="_token"
-                                           value="{{ csrf_token('delete' ~ product.id) }}">
-                                    <input type="number" name="quantity" min="0 " required style="width: 40px;">
-                                    <button class="btn btn-outline-danger btn-sm ms-2" type="submit">
-                                        <i class="fa-regular fa-trash-can"></i>
+                            {% if product.quantity > 1 %}
+                                <button class="toggleButton btn btn-sm">
+                                    <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                    Supprimer
+                                </button>
+                                <div class="champCible" style="display: none;">
+                                    <form action="{{ path('delete_product', {'id': product.id}) }}" method="POST">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('delete' ~ product.id) }}">
+                                        <input type="number" name="quantity" min="0 " required style="width: 40px;">
+                                        <button class="btn btn-outline-danger btn-sm ms-2" type="submit">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            {% else %}
+                                <form method="post" action="{{ path('delete_product', {'id': product.id}) }}" onsubmit="return confirm('Êtes vous sur de vouloir de supprimer ce produit ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                                    <button class="btn btn-sm">
+                                        <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
+                                        Supprimer
                                     </button>
                                 </form>
-                            </div>
-                            <button class="cancelButton btn btn-outline-dark btn-sm ms-2" style="display: none;">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>

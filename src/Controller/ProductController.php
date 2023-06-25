@@ -46,12 +46,8 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newProduct = $form->getData();
-            try {
-                $this->productRepository->save($newProduct, true);
-                $this->addFlash('success', 'Votre produit a été ajouté avec succès.');
-            } catch (\Exception $e) {
-                $this->addFlash('danger', 'Des erreurs ont été détectées. Vérifier vos informations.');
-            }
+            $this->productRepository->save($newProduct, true);
+            $this->addFlash('success', 'Votre produit a été ajouté avec succès.');
 
             return $this->redirectToRoute('product', [], Response::HTTP_SEE_OTHER);
         }
@@ -99,16 +95,10 @@ class ProductController extends AbstractController
                 $product->decreaseQuantity($removedQuantity);
                 $this->entityManager->flush();
 
-                if (0 === $product->getQuantity()) {
-                    $this->entityManager->remove($product);
-                    $this->entityManager->flush();
-                    $this->addFlash('success', 'Votre produit a été supprimé.');
+                if (1 == $removedQuantity) {
+                    $this->addFlash('success', $removedQuantity.' produit a été supprimé.');
                 } else {
-                    if (1 === $removedQuantity) {
-                        $this->addFlash('success', $removedQuantity.' produit a été supprimé.');
-                    } else {
-                        $this->addFlash('success', $removedQuantity.' produits ont été supprimés.');
-                    }
+                    $this->addFlash('success', $removedQuantity.' produits ont été supprimés.');
                 }
             }
         }
