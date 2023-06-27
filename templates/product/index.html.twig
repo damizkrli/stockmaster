@@ -48,14 +48,14 @@
                 <tr data-product-id="{{ product.id }}" id="spinner-row"
                     {% if product.quantity > 5 %}class="zero-quantity"{% endif %}>
                     <td class="center">{{ product.quantity }},00</td>
-                    <td>{{ product.brand | title }}</td>
-                    <td>{{ product.name | title }}</td>
+                    <td>{{ product.brand | upper }}</td>
+                    <td>{{ product.name | upper }}</td>
                     {% if product.serialNumber and product.quantity <= 1 %}
-                        <td>{{ product.serialNumber }}</td>
+                        <td>{{ product.serialNumber | upper }}</td>
                     {% else %}
                         <td>--</td>
                     {% endif %}
-                    <td class="center">{{ product.reference }}</td>
+                    <td class="center">{{ product.reference | upper }}</td>
                     <td class="center">{{ product.addedAt ? product.addedAt|date('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
