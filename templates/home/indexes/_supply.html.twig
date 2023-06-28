@@ -19,8 +19,8 @@
                         <i class="fa-solid fa-circle-exclamation danger"></i>
                     </td>
                     <td class="start">{{ supply.quantity }},00</td>
-                    <td>{{ supply.name }}</td>
-                    <td>{{ supply.reference }}</td>
+                    <td>{{ supply.name | upper }}</td>
+                    <td>{{ supply.reference | upper }}</td>
                     <td>{{ supply.addedAt ? supply.addedAt|date('Y-m-d') }}</td>
                 </tr>
             {% endif %}

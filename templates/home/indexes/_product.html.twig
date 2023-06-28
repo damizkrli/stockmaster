@@ -21,9 +21,9 @@
                         <i class="fa-solid fa-circle-exclamation danger"></i>
                     </td>
                     <td class="start">{{ product.quantity }},00</td>
-                    <td>{{ product.brand|title }}</td>
-                    <td>{{ product.name|title }}</td>
-                    <td>{{ product.reference }}</td>
+                    <td>{{ product.brand | upper }}</td>
+                    <td>{{ product.name | upper }}</td>
+                    <td>{{ product.reference | upper }}</td>
                     <td>{{ product.addedAt ? product.addedAt|date('Y-m-d') }}</td>
                 </tr>
             {% endif %}

@@ -20,9 +20,9 @@
                         <i class="fa-solid fa-circle-exclamation danger"></i>
                     </td>
                     <td class="start">{{ outOfStock.quantity }},00</td>
-                    <td>{{ outOfStock.brand | title }}</td>
-                    <td>{{ outOfStock.name }}</td>
-                    <td>{{ outOfStock.reference }}</td>
+                    <td>{{ outOfStock.brand | upper }}</td>
+                    <td>{{ outOfStock.name | upper }}</td>
+                    <td>{{ outOfStock.reference | upper }}</td>
                     <td>{{ outOfStock.addedAt ? outOfStock.addedAt|date('Y-m-d') }}</td>
                 </tr>
             {% endif %}
